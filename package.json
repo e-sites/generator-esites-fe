@@ -25,12 +25,14 @@
     "url": "https://github.com/e-sites/generator-esites-fe/issues"
   },
   "homepage": "https://github.com/e-sites/generator-esites-fe#readme",
-  "devDependencies": {
+  "dependencies": {
     "@e-sites/eslint-config": "^2.0.0",
     "babel-eslint": "^8.2.3",
+    "chalk": "^2.4.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "yeoman-generator": "^2.0.4"
+    "yeoman-generator": "^2.0.4",
+    "yosay": "^2.0.2"
   }
 }
