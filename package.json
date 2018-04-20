@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/e-sites/generator-esites-fe.git"
   },
+  "files": [
+    "app"
+  ],
   "keywords": [
     "yeoman",
     "yeoman-generator",
@@ -22,7 +25,12 @@
     "url": "https://github.com/e-sites/generator-esites-fe/issues"
   },
   "homepage": "https://github.com/e-sites/generator-esites-fe#readme",
-  "dependencies": {
+  "devDependencies": {
+    "@e-sites/eslint-config": "^1.0.2",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "yeoman-generator": "^2.0.4"
   }
 }
