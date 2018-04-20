@@ -1,6 +1,7 @@
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const chalk = require('chalk');
+const slugify = require('slugify');
 
 module.exports = class extends Generator {
   hello() {
@@ -46,6 +47,16 @@ module.exports = class extends Generator {
 
   writing() {
     console.log(chalk.rgb(244, 0, 77)('Writing files…'));
+
+    // package.json
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      {
+        name: slugify(this.projectName),
+        projectName: this.projectName,
+      }
+    );
 
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
