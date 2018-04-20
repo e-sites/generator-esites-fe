@@ -22,16 +22,24 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
+        name: 'webroot',
+        message: 'Your web root folder?',
+        default: './',
+      },
+      {
+        type: 'input',
         name: 'build',
-        message: 'Your build folder?',
-        default: './build',
+        message: 'Your build folder? (relative to web root)',
+        default: 'build',
       },
     ]).then((answers) => {
       console.log(chalk.rgb(73, 166, 255)('The answers are correct! You go through for the fridge…'));
 
       this.projectName = answers.name;
-      this.sourceFolder = answers.source;
+      this.sourcePath = answers.source;
+      this.webRootPath = answers.webroot;
       this.buildFolder = answers.build;
+      this.buildPath = `${this.webRootPath}/${this.buildFolder}`;
     });
   }
 
@@ -55,17 +63,21 @@ module.exports = class extends Generator {
       {
         name: slugify(this.projectName),
         projectName: this.projectName,
+        sourcePath: this.sourcePath,
+        buildFolder: this.buildFolder,
+        webRootPath: this.webRootPath,
+        buildPath: this.buildPath,
       }
     );
 
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.buildFolder}/.gitkeep`)
+      this.destinationPath(`${this.buildPath}/.gitkeep`)
     );
 
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.sourceFolder}/.gitkeep`)
+      this.destinationPath(`${this.sourcePath}/.gitkeep`)
     );
   }
 };

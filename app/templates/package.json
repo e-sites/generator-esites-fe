@@ -4,7 +4,55 @@
   "description": "<%= projectName %> frontend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp watch",
+    "build": "gulp"
   },
-  "author": "E-sites <e-sites.nl>"
+  "author": "E-sites <e-sites.nl>",
+
+  "config": {
+    "js": {
+      "entries": [
+        "app.js"
+      ],
+      "vendor": [
+        "<%= sourcePath %>/js/polyfills/core-js",
+        "svgxuse",
+        "@e-sites/vestigo",
+        "scriptjs",
+        "conditioner-core"
+      ]
+    },
+    "paths": {
+      "tasks": "/tasks",
+      "source": "<%= sourcePath %>",
+      "dist": "<%= buildPath %>",
+      "webroot": "<%= webRootPath %>",
+      "public": "<%= buildFolder %>",
+      "folders": {
+        "fonts": "/fonts",
+        "css": "/css",
+        "js": "/js",
+        "images": "/img",
+        "svg": "/svg",
+        "mjml": "/path-to-mail"
+      }
+    },
+    "copyAssets": false,
+    "patternlib": false,
+    "sync": {
+      "open": "local",
+      "openPath": "/test"
+    },
+    "revisionFiles": true,
+    "mjml": {
+      "enabled": false,
+      "extension": ".twig"
+    }
+  },
+
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 10"
+  ]
 }
