@@ -1,3 +1,6 @@
 {
-  "extends": "@e-sites/eslint-config"
+  "extends": "@e-sites/eslint-config",
+  "rules": {
+    "no-underscore-dangle": "off"
+  }
 }

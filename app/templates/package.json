@@ -54,5 +54,8 @@
   "browserslist": [
     "last 2 versions",
     "ie >= 10"
-  ]
+  ],
+  "dependencies": {
+    "bourbon": "^5.0.0"
+  }
 }

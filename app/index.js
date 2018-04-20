@@ -43,20 +43,13 @@ module.exports = class extends Generator {
     });
   }
 
-  // paths() {
-  //   console.log(this.destinationRoot());
-
-  //   console.log(this.destinationPath('index.js'));
-
-  //   console.log(this.sourceRoot());
-
-  //   console.log(this.templatePath('index.js'));
-  // }
-
   writing() {
     console.log(chalk.rgb(244, 0, 77)('Writing files…'));
 
-    // package.json
+    this._writingPackage();
+  }
+
+  _writingPackage() {
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
@@ -69,15 +62,18 @@ module.exports = class extends Generator {
         buildPath: this.buildPath,
       }
     );
+  }
 
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.buildPath}/.gitkeep`)
-    );
+  install() {
+    this.installDependencies({
+      npm: true,
+      bower: false,
+      skipMessage: this.options['skip-install-message'],
+      skipInstall: this.options['skip-install'],
+    });
+  }
 
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.sourcePath}/.gitkeep`)
-    );
+  end() {
+    this.log(yosay(`Whoop! We’re done! Run ${chalk.rgb(244, 0, 77)('npm run watch')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
   }
 };
