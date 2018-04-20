@@ -1,0 +1,28 @@
+{
+  "name": "@e-sites/generator-esites-fe",
+  "version": "0.0.1",
+  "description": "Yeoman generator for E-sites frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-sites/generator-esites-fe.git"
+  },
+  "keywords": [
+    "yeoman",
+    "yeoman-generator",
+    "e-sites",
+    "frontend"
+  ],
+  "author": "Bram Smulders <bram@e-sites.nl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/e-sites/generator-esites-fe/issues"
+  },
+  "homepage": "https://github.com/e-sites/generator-esites-fe#readme",
+  "dependencies": {
+    "yeoman-generator": "^2.0.4"
+  }
+}
