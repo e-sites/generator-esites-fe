@@ -1,0 +1,2 @@
+<%= sourcePath.replace('./', '') %>/js/polyfills/**/*.js
+<%= buildPath.replace('./', '') %>/**/*.js

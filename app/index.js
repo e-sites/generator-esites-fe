@@ -39,7 +39,7 @@ module.exports = class extends Generator {
       this.sourcePath = answers.source;
       this.webRootPath = answers.webroot;
       this.buildFolder = answers.build;
-      this.buildPath = `${this.webRootPath}/${this.buildFolder}`;
+      this.buildPath = `${this.webRootPath}${this.buildFolder}`;
     });
   }
 
@@ -47,6 +47,10 @@ module.exports = class extends Generator {
     console.log(chalk.rgb(244, 0, 77)('Writing files…'));
 
     this._writingPackage();
+    this._writingEditorConfig();
+    this._writingBabel();
+    this._writingEslintIgnore();
+    this._writingEslint();
   }
 
   _writingPackage() {
@@ -61,6 +65,38 @@ module.exports = class extends Generator {
         webRootPath: this.webRootPath,
         buildPath: this.buildPath,
       }
+    );
+  }
+
+  _writingEslintIgnore() {
+    this.fs.copyTpl(
+      this.templatePath('.eslintignore'),
+      this.destinationPath('.eslintignore'),
+      {
+        sourcePath: this.sourcePath,
+        buildPath: this.buildPath,
+      }
+    );
+  }
+
+  _writingEditorConfig() {
+    this.fs.copyTpl(
+      this.templatePath('.editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+  }
+
+  _writingBabel() {
+    this.fs.copyTpl(
+      this.templatePath('.babelrc'),
+      this.destinationPath('.babelrc')
+    );
+  }
+
+  _writingEslint() {
+    this.fs.copyTpl(
+      this.templatePath('.eslintrc'),
+      this.destinationPath('.eslintrc')
     );
   }
 
