@@ -79,6 +79,8 @@ module.exports = class extends Generator {
     this._writingEslint();
     this._writingGitignore();
     this._writingStylelint();
+    this._writingGulptasks();
+    this._writingWebpack();
   }
 
   _writingGitkeeps() {
@@ -150,6 +152,25 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('.stylelintrc'),
       this.destinationPath('.stylelintrc')
+    );
+  }
+
+  _writingGulptasks() {
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js')
+    );
+
+    this.fs.copy(
+      this.templatePath('_tasks'),
+      this.destinationPath('_tasks')
+    );
+  }
+
+  _writingWebpack() {
+    this.fs.copyTpl(
+      this.templatePath('webpack.config.js'),
+      this.destinationPath('webpack.config.js')
     );
   }
 
