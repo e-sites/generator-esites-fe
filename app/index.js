@@ -35,10 +35,35 @@ module.exports = class extends Generator {
     ]).then((answers) => {
       console.log(chalk.rgb(73, 166, 255)('The answers are correct! You go through for the fridge…'));
 
+      /**
+       * A little defensive coding against folders not properly set by the user
+       */
+      let webRootPath = answers.webroot;
+      let buildfolder = answers.build;
+
+      if (buildfolder.startsWith('./')) {
+        buildfolder = buildfolder.replace('./', '');
+      } else if (buildfolder.startsWith('/')) {
+        buildfolder = buildfolder.substring(1);
+      }
+
+      if (webRootPath.startsWith('/')) {
+        webRootPath = `.${webRootPath}`;
+      } else if (!webRootPath.startsWith('./')) {
+        webRootPath = `./${webRootPath}`;
+      }
+
+      if (!webRootPath.endsWith('/')) {
+        webRootPath = `${webRootPath}/`;
+      }
+
+      /**
+       * Store stuff for later use
+       */
       this.projectName = answers.name;
       this.sourcePath = answers.source;
-      this.webRootPath = answers.webroot;
-      this.buildFolder = answers.build;
+      this.webRootPath = webRootPath;
+      this.buildFolder = buildfolder;
       this.buildPath = `${this.webRootPath}${this.buildFolder}`;
     });
   }
@@ -46,11 +71,20 @@ module.exports = class extends Generator {
   writing() {
     console.log(chalk.rgb(244, 0, 77)('Writing files…'));
 
+    this._writingGitkeeps();
     this._writingPackage();
     this._writingEditorConfig();
     this._writingBabel();
     this._writingEslintIgnore();
     this._writingEslint();
+    this._writingGitignore();
+  }
+
+  _writingGitkeeps() {
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.buildPath}/js/.gitkeep`)
+    );
   }
 
   _writingPackage() {
@@ -97,6 +131,17 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('.eslintrc'),
       this.destinationPath('.eslintrc')
+    );
+  }
+
+  _writingGitignore() {
+    this.fs.copyTpl(
+      this.templatePath('.gitignore'),
+      this.destinationPath('.gitignore'),
+      {
+        sourcePath: this.sourcePath,
+        buildPath: this.buildPath,
+      }
     );
   }
 
