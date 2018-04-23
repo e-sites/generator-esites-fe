@@ -81,6 +81,7 @@ module.exports = class extends Generator {
     this._writingStylelint();
     this._writingGulptasks();
     this._writingWebpack();
+    this._writingSource();
   }
 
   _writingGitkeeps() {
@@ -171,6 +172,13 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js')
+    );
+  }
+
+  _writingSource() {
+    this.fs.copy(
+      this.templatePath('_source'),
+      this.destinationPath(this.sourcePath)
     );
   }
 
