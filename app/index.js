@@ -78,6 +78,7 @@ module.exports = class extends Generator {
     this._writingEslintIgnore();
     this._writingEslint();
     this._writingGitignore();
+    this._writingStylelint();
   }
 
   _writingGitkeeps() {
@@ -142,6 +143,13 @@ module.exports = class extends Generator {
         sourcePath: this.sourcePath,
         buildPath: this.buildPath,
       }
+    );
+  }
+
+  _writingStylelint() {
+    this.fs.copyTpl(
+      this.templatePath('.stylelintrc'),
+      this.destinationPath('.stylelintrc')
     );
   }
 
