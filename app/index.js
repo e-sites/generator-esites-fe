@@ -192,6 +192,6 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.log(yosay(`Whoop! We’re done! Run ${chalk.rgb(244, 0, 77)('npm run watch')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+    this.log(yosay(`Whoop! We’re done! Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
   }
 };
