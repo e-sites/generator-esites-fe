@@ -96,7 +96,10 @@ module.exports = class extends Generator {
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
       {
-        name: slugify(this.projectName),
+        name: slugify(this.projectName, {
+          remove: /[$*_+~.()'"!\-:@]/g,
+          lower: true,
+        }),
         projectName: this.projectName,
         sourcePath: this.sourcePath,
         buildFolder: this.buildFolder,
