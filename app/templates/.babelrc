@@ -5,8 +5,9 @@
       {
         "targets": {
           "browsers": [
-            "last 2 versions",
-            "ie >= 10"
+            ">0.25% in NL",
+            "ie 11",
+            "not op_mini all"
           ]
         },
         "debug": true
