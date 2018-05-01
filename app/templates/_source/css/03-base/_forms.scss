@@ -1,0 +1,109 @@
+/**
+ * base.forms
+ * Basic styling for form fields, labels, etc.
+ */
+
+/**
+ * reset
+ */
+fieldset {
+  margin-bottom: $spacing-base;
+}
+
+legend {
+  padding: 0;
+  margin-bottom: $spacing-tiny;
+  font-weight: 600;
+}
+
+textarea,
+label {
+  display: block;
+}
+
+
+/**
+ * Label
+ * 1. If the label is connected to an input, have user feedback for interaction
+ */
+label {
+  margin-bottom: $spacing-tiny;
+  font-weight: bold;
+
+  &[for] {
+    cursor: pointer; /* [1] */
+  }
+}
+
+
+/**
+ * Text input & selects
+ */
+#{$all-text-inputs},
+select {
+  @include shared-input;
+  width: 100%;
+  max-width: 24rem;
+  margin-bottom: $spacing-small;
+  border-color: $color-gray-medium;
+
+  #{$all-hovers} {
+    border-color: $color-gray-dark;
+  }
+
+  /**
+   * Validation classes
+   * 1. Shit needs to be immutable, disabled is disabled
+   */
+  &.is-valid {
+    border-color: $color-success !important;
+  }
+
+  &.is-invalid {
+    border-color: $color-error !important;
+  }
+
+  /**
+   * 1. Shit needs to be immutable, disabled is disabled
+   */
+  &:disabled {
+    color: $color-gray-medium !important; /* [1] */
+    background-color: $color-gray-light !important; /* [1] */
+    border-color: $color-gray-medium !important;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: $color-gray-medium;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+select {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIG92ZXJmbG93PSJ2aXNpYmxlIiB2aWV3Qm94PSIwIDAgNTMxLjc0IDQ2MC41Ij4NCiAgPHBhdGggc3Ryb2tlPSIjMDAwIiBkPSJNNTMwLjg3NC41bC0yNjUuMDA0IDQ1OUwuODY2LjV6Ii8+DQo8L3N2Zz4NCg==');
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-position: right $spacing-small top 50%;
+  background-size: ($spacing-tiny * 1.5) ($spacing-tiny * 1.5);
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+[type='checkbox'],
+[type='radio'] {
+  display: inline-block;
+  margin-right: $spacing-small;
+
+  + label {
+    display: inline-block;
+  }
+}
+
+[type='file'] {
+  width: 100%;
+}

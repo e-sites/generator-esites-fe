@@ -1,0 +1,28 @@
+/**
+ * base.tables
+ */
+
+table {
+  width: 100%;
+  margin-bottom: $spacing-base;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: $spacing-small 0;
+}
+
+th {
+  border-bottom: 1px solid $color-gray-medium;
+  font-weight: 600;
+  text-align: left;
+}
+
+tr,
+td,
+th {
+  vertical-align: middle;
+}

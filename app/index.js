@@ -32,6 +32,11 @@ module.exports = class extends Generator {
         message: 'Your build folder? (relative to web root)',
         default: 'build',
       },
+      {
+        type: 'confirm',
+        name: 'useTest',
+        message: 'Do you want to copy the HTML test file?',
+      },
     ]).then((answers) => {
       console.log(chalk.rgb(73, 166, 255)('The answers are correct! You go through for the fridge…'));
 
@@ -65,6 +70,20 @@ module.exports = class extends Generator {
       this.webRootPath = webRootPath;
       this.buildFolder = buildfolder;
       this.buildPath = `${this.webRootPath}${this.buildFolder}`;
+      this.useTest = answers.useTest;
+
+      this.templateSettings = {
+        name: slugify(this.projectName, {
+          remove: /[$*_+~.()'"!\:@]/g,
+          lower: true,
+        }),
+        projectName: this.projectName,
+        sourcePath: this.sourcePath,
+        buildFolder: this.buildFolder,
+        webRootPath: this.webRootPath,
+        buildPath: this.buildPath,
+        openFolder: this.useTest ? 'test' : '',
+      };
     });
   }
 
@@ -82,6 +101,10 @@ module.exports = class extends Generator {
     this._writingGulptasks();
     this._writingWebpack();
     this._writingSource();
+
+    if (this.useTest) {
+      this._writingTest();
+    }
   }
 
   _writingGitkeeps() {
@@ -95,17 +118,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
-      {
-        name: slugify(this.projectName, {
-          remove: /[$*_+~.()'"!\-:@]/g,
-          lower: true,
-        }),
-        projectName: this.projectName,
-        sourcePath: this.sourcePath,
-        buildFolder: this.buildFolder,
-        webRootPath: this.webRootPath,
-        buildPath: this.buildPath,
-      }
+      this.templateSettings
     );
   }
 
@@ -113,10 +126,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('.eslintignore'),
       this.destinationPath('.eslintignore'),
-      {
-        sourcePath: this.sourcePath,
-        buildPath: this.buildPath,
-      }
+      this.templateSettings
     );
   }
 
@@ -145,10 +155,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore'),
-      {
-        sourcePath: this.sourcePath,
-        buildPath: this.buildPath,
-      }
+      this.templateSettings
     );
   }
 
@@ -182,6 +189,14 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('_source'),
       this.destinationPath(this.sourcePath)
+    );
+  }
+
+  _writingTest() {
+    this.fs.copyTpl(
+      this.templatePath('_test/index.html'),
+      this.destinationPath(`${this.webRootPath}/test/index.html`),
+      this.templateSettings
     );
   }
 

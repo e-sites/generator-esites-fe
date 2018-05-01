@@ -42,7 +42,7 @@
     "patternlib": false,
     "sync": {
       "open": "local",
-      "openPath": "/test"
+      "openPath": "/<%= openFolder %>"
     },
     "revisionFiles": true,
     "mjml": {
@@ -57,7 +57,7 @@
   ],
   "devDependencies": {
     "@e-sites/eslint-config": "^2.0.0",
-    "@e-sites/stylelint-config-esites": "^1.0.0",
+    "@e-sites/stylelint-config-esites": "^1.0.1",
     "@symfony/webpack-encore": "^0.20.1",
     "babel-eslint": "^8.2.3",
     "babel-plugin-dynamic-import-webpack": "^1.0.2",
@@ -86,7 +86,7 @@
     "gulp-tasker": "^0.3.1",
     "node-notifier": "^5.2.1",
     "stylelint": "^9.2.0",
-    "stylelint-scss": "^3.0.1",
+    "stylelint-scss": "^3.1.0",
     "webpack-stream": "^4.0.3"
   },
   "dependencies": {

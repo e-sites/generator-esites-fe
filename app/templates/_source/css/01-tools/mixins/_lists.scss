@@ -1,0 +1,24 @@
+/**
+ * tools.mixins.lists
+ * A set of handy dandy mixins for lists
+ */
+
+@mixin list-clean {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+@mixin list-padding {
+  padding-left: $spacing-base;
+}
+
+@mixin list-decimal {
+  @include list-padding;
+  list-style-type: decimal;
+}
+
+@mixin list-bullets {
+  @include list-padding;
+  list-style-type: disc;
+}

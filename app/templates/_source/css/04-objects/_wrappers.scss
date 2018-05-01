@@ -1,0 +1,19 @@
+/**
+ * objects.wrapper
+ * Retains content to a max width
+ */
+
+.wrapper-inner {
+  display: block;
+  width: 100%;
+  max-width: $max-width-base;
+  padding-left: $spacing-base / 2;
+  padding-right: $spacing-base / 2;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include mq($from: md) {
+    padding-left: $spacing-base;
+    padding-right: $spacing-base;
+  }
+}
