@@ -99,7 +99,6 @@
     "conditioner-core": "^2.3.1",
     "core-js": "^2.5.5",
     "element-dataset": "^2.2.6",
-    "jquery": "^3.3.1",
     "normalize.css": "^8.0.0",
     "sass-mq": "^4.0.2",
     "scriptjs": "^2.5.8",

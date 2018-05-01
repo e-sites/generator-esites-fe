@@ -2,108 +2,178 @@ const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const chalk = require('chalk');
 const slugify = require('slugify');
+const compareVersions = require('compare-versions');
+const packageJson = require('../package.json');
 
 module.exports = class extends Generator {
   hello() {
     this.log(yosay(`Welcome to the ${chalk.rgb(244, 0, 77)('E-sites')} frontend generator!`));
 
-    return this.prompt([
+    // We'll need this later, you'll never know
+    this.run = true;
+
+    // Get possible current config file from project
+    const config = this.config.getAll();
+
+    // Cache default prompts
+    const prompts = [
       {
         type: 'input',
         name: 'name',
         message: 'Your project name',
         default: this.appname,
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
       },
       {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
-        default: './source',
+        default: config.source ? config.source : './source',
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
       },
       {
         type: 'input',
         name: 'webroot',
         message: 'Your web root folder?',
-        default: './',
+        default: config.webroot ? config.webroot : './',
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
       },
       {
         type: 'input',
         name: 'build',
         message: 'Your build folder? (relative to web root)',
-        default: 'build',
+        default: config.build ? config.build : 'build',
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
       },
       {
         type: 'confirm',
         name: 'useTest',
         message: 'Do you want to copy the HTML test file?',
+        default: config.useTest,
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
       },
-    ]).then((answers) => {
-      console.log(chalk.rgb(73, 166, 255)('The answers are correct! You go through for the fridge…'));
+    ];
 
-      /**
-       * A little defensive coding against folders not properly set by the user
-       */
-      let webRootPath = answers.webroot;
-      let buildfolder = answers.build;
 
-      if (buildfolder.startsWith('./')) {
-        buildfolder = buildfolder.replace('./', '');
-      } else if (buildfolder.startsWith('/')) {
-        buildfolder = buildfolder.substring(1);
+    /**
+     * Check if there are settings logged in the cached config
+     */
+    if (Object.keys(config).length) {
+      const compare = compareVersions(packageJson.version, config.version);
+      // check if current version is bigger than version of config
+      if (compare >= 0) {
+        // Prepend update prompt to promts
+        prompts.unshift({
+          type: 'confirm',
+          name: 'upgrade',
+          message: `Your version is lower or equal to the version you want to install (${config.version} < ${packageJson.version}). Are you sure you want to upgrade?`,
+          default: false,
+        })
+      }
+    }
+
+
+    /**
+     * Actual prompt the user
+     */
+    return this.prompt(prompts).then((answers) => {
+      if ('upgrade' in answers) {
+        this.run = answers.upgrade;
       }
 
-      if (webRootPath.startsWith('/')) {
-        webRootPath = `.${webRootPath}`;
-      } else if (!webRootPath.startsWith('./')) {
-        webRootPath = `./${webRootPath}`;
-      }
+      if (this.run) {
+        console.log(chalk.rgb(73, 166, 255)('The answers are correct! You go through for the fridge…'));
 
-      if (!webRootPath.endsWith('/')) {
-        webRootPath = `${webRootPath}/`;
-      }
+        /**
+         * A little defensive coding against folders not properly set by the user
+         */
+        let webRootPath = answers.webroot;
+        let buildfolder = answers.build;
 
-      /**
-       * Store stuff for later use
-       */
-      this.projectName = answers.name;
-      this.sourcePath = answers.source;
-      this.webRootPath = webRootPath;
-      this.buildFolder = buildfolder;
-      this.buildPath = `${this.webRootPath}${this.buildFolder}`;
-      this.useTest = answers.useTest;
+        if (buildfolder.startsWith('./')) {
+          buildfolder = buildfolder.replace('./', '');
+        } else if (buildfolder.startsWith('/')) {
+          buildfolder = buildfolder.substring(1);
+        }
 
-      this.templateSettings = {
-        name: slugify(this.projectName, {
+        if (webRootPath.startsWith('/')) {
+          webRootPath = `.${webRootPath}`;
+        } else if (!webRootPath.startsWith('./')) {
+          webRootPath = `./${webRootPath}`;
+        }
+
+        if (!webRootPath.endsWith('/')) {
+          webRootPath = `${webRootPath}/`;
+        }
+
+
+        /**
+         * Store stuff for later use
+         */
+        this.projectName = slugify(answers.name, {
           remove: /[$*_+~.()'"!\:@]/g,
           lower: true,
-        }),
-        projectName: this.projectName,
-        sourcePath: this.sourcePath,
-        buildFolder: this.buildFolder,
-        webRootPath: this.webRootPath,
-        buildPath: this.buildPath,
-        openFolder: this.useTest ? 'test' : '',
-      };
+        });
+        this.sourcePath = answers.source;
+        this.webRootPath = webRootPath;
+        this.buildFolder = buildfolder;
+        this.buildPath = `${this.webRootPath}${this.buildFolder}`;
+        this.useTest = answers.useTest;
+
+
+        /**
+         * Store answers in a `.yo-rc.json` for later use
+         */
+        this.config.set('version', packageJson.version);
+        this.config.set(answers);
+        this.config.set('name', this.projectName);
+
+        this.config.save();
+
+
+        /**
+         * Configure template settings for use in templated files
+         */
+        this.templateSettings = {
+          name: this.projectName,
+          projectName: this.projectName,
+          sourcePath: this.sourcePath,
+          buildFolder: this.buildFolder,
+          webRootPath: this.webRootPath,
+          buildPath: this.buildPath,
+          openFolder: this.useTest ? 'test' : '',
+        };
+      }
     });
   }
 
   writing() {
-    console.log(chalk.rgb(244, 0, 77)('Writing files…'));
+    if (this.run) {
+      this._writingGitkeeps();
+      this._writingPackage();
+      this._writingEditorConfig();
+      this._writingBabel();
+      this._writingEslintIgnore();
+      this._writingEslint();
+      this._writingGitignore();
+      this._writingStylelint();
+      this._writingGulptasks();
+      this._writingWebpack();
+      this._writingSource();
 
-    this._writingGitkeeps();
-    this._writingPackage();
-    this._writingEditorConfig();
-    this._writingBabel();
-    this._writingEslintIgnore();
-    this._writingEslint();
-    this._writingGitignore();
-    this._writingStylelint();
-    this._writingGulptasks();
-    this._writingWebpack();
-    this._writingSource();
-
-    if (this.useTest) {
-      this._writingTest();
+      if (this.useTest) {
+        this._writingTest();
+      }
     }
   }
 
@@ -201,15 +271,21 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies({
-      npm: true,
-      bower: false,
-      skipMessage: this.options['skip-install-message'],
-      skipInstall: this.options['skip-install'],
-    });
+    if (this.run) {
+      this.installDependencies({
+        npm: true,
+        bower: false,
+        skipMessage: this.options['skip-install-message'],
+        skipInstall: this.options['skip-install'],
+      });
+    }
   }
 
   end() {
-    this.log(yosay(`Whoop! We’re done! Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+    if (this.run) {
+      this.log(yosay(`${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+    } else {
+      this.log(yosay(`${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+    }
   }
 };
