@@ -9,13 +9,6 @@
     "build": "gulp"
   },
   "author": "E-sites <e-sites.nl>",
-
-  "browserslist": [
-    ">0.25% in NL",
-    "ie 11",
-    "not op_mini all"
-  ],
-
   "devDependencies": {
     "@e-sites/eslint-config": "^2.0.0",
     "@e-sites/stylelint-config-esites": "^1.0.1",

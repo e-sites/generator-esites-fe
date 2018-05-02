@@ -164,6 +164,7 @@ Are you sure you want to upgrade?`,
     if (this.run) {
       this._writingGitkeeps();
       this._writingPackage();
+      this._writingBrowserslist();
       this._writingEditorConfig();
       this._writingBabel();
       this._writingEslintIgnore();
@@ -192,6 +193,13 @@ Are you sure you want to upgrade?`,
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
       this.templateSettings
+    );
+  }
+
+  _writingBrowserslist() {
+    this.fs.copyTpl(
+      this.templatePath('.browserslistrc'),
+      this.destinationPath('.browserslistrc')
     );
   }
 
