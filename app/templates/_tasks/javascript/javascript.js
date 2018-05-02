@@ -14,7 +14,7 @@ const notify = require('gulp-notify');
 const notifier = require('node-notifier'); // eslint-disable-line
 const webpackConfig = require('../../webpack.config.js');
 
-const { paths } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { paths } = require(`${process.cwd()}/gulp-config.js`);
 
 const folder = paths.folders.js;
 

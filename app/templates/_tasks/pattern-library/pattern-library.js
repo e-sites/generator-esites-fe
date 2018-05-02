@@ -10,7 +10,7 @@ const gulp = require('gulp');
 const tasker = require('gulp-tasker');
 const { exec } = require('child_process');
 
-const { paths, patternlibrary } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { paths, patternlibrary } = require(`${process.cwd()}/gulp-config.js`);
 
 const patternlib = (done) => {
   exec('php core/console --generate', (err, stdout, stderr) => {

@@ -4,7 +4,7 @@ const gulp = require('gulp');
 const tasker = require('gulp-tasker');
 
 // Expose config
-const { paths } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { paths } = require('./gulp-config.js');
 
 // Load all tasks
 tasker.loadTasks({

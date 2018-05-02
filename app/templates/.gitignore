@@ -1,11 +1,8 @@
-# Ignore build assets but maintain .gitkeep
-<%= buildPath.replace('./', '') %>/js/**
-<%= buildPath.replace('./', '') %>/css/**
-<%= buildPath.replace('./', '') %>/img/**
-<%= buildPath.replace('./', '') %>/svg/**
-!**/.gitkeep
+# Ignore build assets
+<%= buildPath.replace('./', '') %>/*/*
 
 # misc
 _tmp
 .idea/
 node_modules/
+.vscode

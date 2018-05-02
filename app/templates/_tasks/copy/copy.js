@@ -10,7 +10,7 @@ const fs = require('fs');
 const tasker = require('gulp-tasker');
 const { handleSuccess } = require('../base/handlers');
 
-const { paths, copyAssets } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { paths, copyAssets } = require(`${process.cwd()}/gulp-config.js`);
 
 const copySVGS = () =>
   gulp

@@ -16,7 +16,7 @@ const svgstore = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
 const rename = require('gulp-rename');
 
-const { revisionFiles, paths } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 
 const folder = paths.folders.svg;
 

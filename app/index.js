@@ -3,7 +3,7 @@ const yosay = require('yosay');
 const chalk = require('chalk');
 const slugify = require('slugify');
 const compareVersions = require('compare-versions');
-const packageJson = require('../package.json');
+const generatorConfig = require('../package.json');
 
 module.exports = class extends Generator {
   hello() {
@@ -13,7 +13,7 @@ module.exports = class extends Generator {
     this.run = true;
 
     // Get possible current config file from project
-    const config = this.config.getAll();
+    const projectConfig = this.config.getAll();
 
     // Cache default prompts
     const prompts = [
@@ -30,7 +30,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
-        default: config.source ? config.source : './source',
+        default: projectConfig.source ? projectConfig.source : './source',
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -39,7 +39,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'webroot',
         message: 'Your web root folder?',
-        default: config.webroot ? config.webroot : './',
+        default: projectConfig.webroot ? projectConfig.webroot : './',
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -48,7 +48,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'build',
         message: 'Your build folder? (relative to web root)',
-        default: config.build ? config.build : 'build',
+        default: projectConfig.build ? projectConfig.build : 'build',
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -57,7 +57,7 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'useTest',
         message: 'Do you want to copy the HTML test file?',
-        default: config.useTest,
+        default: projectConfig.useTest,
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -68,15 +68,18 @@ module.exports = class extends Generator {
     /**
      * Check if there are settings logged in the cached config
      */
-    if (Object.keys(config).length) {
-      const compare = compareVersions(packageJson.version, config.version);
+    if (Object.keys(projectConfig).length && 'version' in projectConfig) {
+      const compare = compareVersions(generatorConfig.version, projectConfig.version);
       // check if current version is bigger than version of config
       if (compare >= 0) {
         // Prepend update prompt to promts
         prompts.unshift({
           type: 'confirm',
           name: 'upgrade',
-          message: `Your version is lower or equal to the version you want to install (${config.version} < ${packageJson.version}). Are you sure you want to upgrade?`,
+          message: `This generator has been run already
+generator: ${projectConfig.version}
+project: ${generatorConfig.version}
+Are you sure you want to upgrade?`,
           default: false,
         })
       }
@@ -134,7 +137,7 @@ module.exports = class extends Generator {
         /**
          * Store answers in a `.yo-rc.json` for later use
          */
-        this.config.set('version', packageJson.version);
+        this.config.set('version', generatorConfig.version);
         this.config.set(answers);
         this.config.set('name', this.projectName);
 
@@ -180,7 +183,7 @@ module.exports = class extends Generator {
   _writingGitkeeps() {
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.buildPath}/js/.gitkeep`)
+      this.destinationPath(`${this.buildPath}/.gitkeep`)
     );
   }
 
@@ -244,7 +247,13 @@ module.exports = class extends Generator {
 
     this.fs.copy(
       this.templatePath('_tasks'),
-      this.destinationPath('_tasks')
+      this.destinationPath('tasks')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('gulp-config.js'),
+      this.destinationPath('gulp-config.js'),
+      this.templateSettings
     );
   }
 

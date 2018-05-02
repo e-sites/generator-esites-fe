@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Encore = require('@symfony/webpack-encore');
 
-const { revisionFiles, paths, js: { entries, vendor } } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
 
 const folder = paths.folders.js;
 

@@ -3,7 +3,7 @@ const fs = require('fs');
 const gulp = require('gulp');
 const tasker = require('gulp-tasker');
 
-const { paths, sync } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { paths, sync } = require(`${process.cwd()}/gulp-config.js`);
 let hosts = null;
 
 try {

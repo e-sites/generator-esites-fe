@@ -12,7 +12,7 @@ const { handleError, handleSuccess } = require('../base/handlers');
 const rename = require('gulp-rename');
 const parsemjml = require('gulp-mjml');
 
-const { paths, mjml } = JSON.parse(fs.readFileSync('./package.json')).config;
+const { paths, mjml } = require(`${process.cwd()}/gulp-config.js`);
 
 const folder = paths.folders.mjml;
 
