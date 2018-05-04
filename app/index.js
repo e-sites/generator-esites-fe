@@ -11,6 +11,9 @@ module.exports = class extends Generator {
 
     // We'll need this later, you'll never know
     this.run = true;
+    this.upgrade = false;
+    this.copyAssets = true;
+    this.copyTasks = true;
 
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
@@ -73,15 +76,27 @@ module.exports = class extends Generator {
       // check if current version is bigger than version of config
       if (compare >= 0) {
         // Prepend update prompt to promts
-        prompts.unshift({
-          type: 'confirm',
-          name: 'upgrade',
-          message: `This generator has been run already
+        prompts.unshift(
+          {
+            type: 'confirm',
+            name: 'upgrade',
+            message: `This project is already scaffolded with this generator
 generator: ${projectConfig.version}
 project: ${generatorConfig.version}
 Are you sure you want to upgrade?`,
-          default: false,
-        })
+            default: false,
+          },
+          {
+            type: 'checkbox',
+            name: 'upgradeTypes',
+            message: 'What do you want to upgrade?',
+            choices: ['tasks', 'assets'],
+            default: ['tasks'],
+            when: (answers) => {
+              return ('upgrade' in answers) ? answers.upgrade : true;
+            },
+          }
+        )
       }
     }
 
@@ -92,6 +107,12 @@ Are you sure you want to upgrade?`,
     return this.prompt(prompts).then((answers) => {
       if ('upgrade' in answers) {
         this.run = answers.upgrade;
+        this.upgrade = answers.upgrade;
+      }
+
+      if ('upgradeTypes' in answers) {
+        this.copyTasks = answers.upgradeTypes.includes('tasks');
+        this.copyAssets = answers.upgradeTypes.includes('assets');
       }
 
       if (this.run) {
@@ -163,17 +184,25 @@ Are you sure you want to upgrade?`,
   writing() {
     if (this.run) {
       this._writingGitkeeps();
-      this._writingPackage();
-      this._writingBrowserslist();
+      this._writingGitignore();
       this._writingEditorConfig();
-      this._writingBabel();
+      this._writingBrowserslist();
+      this._writingPackage();
       this._writingEslintIgnore();
       this._writingEslint();
-      this._writingGitignore();
+      this._writingBabel();
       this._writingStylelint();
-      this._writingGulptasks();
-      this._writingWebpack();
-      this._writingSource();
+
+      if (this.copyTasks) {
+        console.log('writing tasks');
+        this._writingGulptasks();
+        this._writingWebpack();
+      }
+
+      if (this.copyAssets) {
+        console.log('writing assets');
+        this._writingSource();
+      }
 
       if (this.useTest) {
         this._writingTest();
