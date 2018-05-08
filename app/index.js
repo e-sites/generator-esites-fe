@@ -96,7 +96,7 @@ Are you sure you want to upgrade?`,
               return ('upgrade' in answers) ? answers.upgrade : true;
             },
           }
-        )
+        );
       }
     }
 
