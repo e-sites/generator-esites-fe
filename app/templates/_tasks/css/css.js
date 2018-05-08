@@ -1,8 +1,5 @@
 /**
  * Compiles the main styles.scss file and creates a source-map
- *
- * @author   Iain van der Wiel <iain@e-sites.nl>
- * @version  1.0
  */
 
 const fs = require('fs');

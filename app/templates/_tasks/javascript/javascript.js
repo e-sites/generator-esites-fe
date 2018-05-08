@@ -1,8 +1,5 @@
 /**
 * Concats/minifies all JS files as defined in config.json under the 'build' key
- *
- * @author   Iain van der Wiel <iain@e-sites.nl>
- * @version  0.1.0
  */
 
 const fs = require('fs');

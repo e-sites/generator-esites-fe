@@ -1,8 +1,5 @@
 /**
  * Does SVG stuff :)
- *
- * @author   Iain van der Wiel <iain@e-sites.nl>
- * @version  0.1.0
  */
 
 const fs = require('fs');

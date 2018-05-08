@@ -1,8 +1,5 @@
 /**
  * Build MJML template
- *
- * @author   John van Hulsen <john@e-sites.nl>
- * @version  0.1.0
  */
 
 const fs = require('fs');
