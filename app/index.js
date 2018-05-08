@@ -188,6 +188,7 @@ Are you sure you want to upgrade?`,
       this._writingEditorConfig();
       this._writingBrowserslist();
       this._writingPackage();
+      this._writingNvm();
       this._writingEslintIgnore();
       this._writingEslint();
       this._writingBabel();
@@ -222,6 +223,13 @@ Are you sure you want to upgrade?`,
       this.templatePath('package.json'),
       this.destinationPath('package.json'),
       this.templateSettings
+    );
+  }
+
+  _writingNvm() {
+    this.fs.copyTpl(
+      this.templatePath('.nvmrc'),
+      this.destinationPath('.nvmrc')
     );
   }
 
