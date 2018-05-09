@@ -17,8 +17,8 @@ const patternlib = (done) => {
   });
 };
 
-// tasker.addTask('default', patternlib');
 // tasker.addTask('deploy', patternlib');
 if (patternlibrary) {
+  tasker.addTask('default', patternlib);
   tasker.addTask('watch', patternlib, `${paths.patterns}/**/*`);
 }
