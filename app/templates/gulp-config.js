@@ -13,7 +13,8 @@ module.exports = {
   },
   paths: {
     tasks: '/tasks',
-    source: '<%= sourcePath %>',
+    source: '<%= sourcePath %>',<% if (usePatternLibrary) { %>
+    patterns: '<%= patternPath %>',<% } %>
     dist: '<%= buildPath %>',
     webroot: '<%= webRootPath %>',
     public: '<%= buildFolder %>',
@@ -26,11 +27,11 @@ module.exports = {
       mjml: '/path-to-mail',
     },
   },
-  copyAssets: false,
-  patternlib: false,
+  copyAssets: true,
+  patternlibrary: <% if (usePatternLibrary) { %>true<% } else { %>false<% } %>,
   sync: {
     open: 'local',
-    openPath: '/<%= openFolder %>',
+    openPath: '/<%= openPath %>',
   },
   revisionFiles: true,
   mjml: {

@@ -18,6 +18,10 @@ module.exports = class extends Generator {
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
 
+    if (Object.keys(projectConfig) && !('version' in projectConfig)) {
+      this.log(yosay(`It seems that a ${chalk.rgb(244, 0, 77)('.yo-rc.json')} is present in the project. Some options are prefilled. Please check if they are correct.`));
+    }
+
     // Cache default prompts
     const prompts = [
       {
@@ -63,6 +67,24 @@ module.exports = class extends Generator {
         default: projectConfig.useTest,
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
+        },
+      },
+      {
+        type: 'confirm',
+        name: 'patternlibrary',
+        message: 'Do you want to configure a pattern library?',
+        default: projectConfig.patternlibrary,
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
+      },
+      {
+        type: 'input',
+        name: 'patternPath',
+        message: 'Path to your pattern files?',
+        default: projectConfig.patternPath ? projectConfig.patternPath : './',
+        when: (answers) => {
+          return ('patternlibrary' in answers) ? answers.patternlibrary : false;
         },
       },
     ];
@@ -152,6 +174,8 @@ Are you sure you want to upgrade?`,
         this.webRootPath = webRootPath;
         this.buildFolder = buildfolder;
         this.buildPath = `${this.webRootPath}${this.buildFolder}`;
+        this.usePatternLibrary = answers.patternlibrary;
+        this.patternPath = answers.patternPath;
         this.useTest = answers.useTest;
 
 
@@ -175,7 +199,9 @@ Are you sure you want to upgrade?`,
           buildFolder: this.buildFolder,
           webRootPath: this.webRootPath,
           buildPath: this.buildPath,
-          openFolder: this.useTest ? 'test' : '',
+          usePatternLibrary: this.usePatternLibrary,
+          patternPath: this.patternPath,
+          openPath: this.useTest ? 'test' : '',
         };
       }
     });
