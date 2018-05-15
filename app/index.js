@@ -18,7 +18,7 @@ module.exports = class extends Generator {
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
 
-    if (Object.keys(projectConfig) && !('version' in projectConfig)) {
+    if (Object.keys(projectConfig).length && !('version' in projectConfig)) {
       this.log(yosay(`It seems that a ${chalk.rgb(244, 0, 77)('.yo-rc.json')} is present in the project. Some options are prefilled. Please check if they are correct.`));
     }
 
