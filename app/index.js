@@ -382,6 +382,18 @@ Are you sure you want to upgrade?`,
     );
 
     this.fs.copyTpl(
+      this.templatePath('_pattern-library-dynamic/listeners.json'),
+      this.destinationPath('config/listeners.json'),
+      this.templateSettings
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('_pattern-library-dynamic/patternengines.json'),
+      this.destinationPath('config/patternengines.json'),
+      this.templateSettings
+    );
+
+    this.fs.copyTpl(
       this.templatePath('_pattern-library-dynamic/pattern-scaffolding.scss'),
       this.destinationPath(`${this.sourcePath}/css/pattern-scaffolding.scss`),
       this.templateSettings

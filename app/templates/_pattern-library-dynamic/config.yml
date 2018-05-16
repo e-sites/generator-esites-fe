@@ -44,6 +44,12 @@ defaultPattern: "all"
 # show pattern info by default on the "view all" views
 defaultShowPatternInfo: false
 
+# ish
+ishMinimum: '240'
+ishMaximum: '2600'
+ishControlsHide:
+    - hay
+
 # twig engine settings
 styleguideKit: pattern-lab/styleguidekit-twig-default
 styleguideKitPath: vendor/pattern-lab/styleguidekit-twig-default
