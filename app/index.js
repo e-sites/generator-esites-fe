@@ -453,9 +453,9 @@ Are you sure you want to upgrade?`,
 
   end() {
     if (this.run) {
-      this.log(yosay(`${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+      this.log(yosay(`${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')}  or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
     } else {
-      this.log(yosay(`${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+      this.log(yosay(`${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
     }
   }
 };

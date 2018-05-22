@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp watch",
+    "serve": "gulp serve",
     "build": "gulp"
   },
   "author": "E-sites <e-sites.nl>",

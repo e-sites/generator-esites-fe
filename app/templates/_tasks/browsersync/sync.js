@@ -63,7 +63,7 @@ const serve = (done) => {
   fileWatcher.on('add', reload);
   fileWatcher.on('change', reload);
 
-  const cssWatcher = gulp.watch(`${paths.dist}/**/styles.css`);
+  const cssWatcher = gulp.watch(`${paths.dist}/**/style.css`);
   cssWatcher.on('add', reloadCSS);
   cssWatcher.on('change', reloadCSS);
 

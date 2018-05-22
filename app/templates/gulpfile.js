@@ -23,9 +23,14 @@ gulp.task('sync', gulp.series(tasker.getTasks('sync').tasks));
 // Watch task when run with 'gulp watch'
 gulp.task(
   'watch',
-  gulp.series('default', 'sync', () => {
+  gulp.series('default', () => {
     tasker.getTasks('watch').tasks.forEach((task) => {
       gulp.watch(task.folders, gulp.parallel(task.tasks));
     });
   })
+);
+
+gulp.task(
+  'serve',
+  gulp.series('sync', 'watch')
 );
