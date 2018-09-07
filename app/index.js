@@ -69,24 +69,6 @@ module.exports = class extends Generator {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
       },
-      {
-        type: 'confirm',
-        name: 'patternlibrary',
-        message: 'Do you want to configure a pattern library?',
-        default: projectConfig.patternlibrary,
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
-      },
-      {
-        type: 'input',
-        name: 'patternPath',
-        message: 'Path to your pattern files?',
-        default: projectConfig.patternPath ? projectConfig.patternPath : './',
-        when: (answers) => {
-          return ('patternlibrary' in answers) ? answers.patternlibrary : false;
-        },
-      },
     ];
 
 
@@ -145,20 +127,11 @@ Are you sure you want to upgrade?`,
          */
         let webRootPath = answers.webroot;
         let buildfolder = answers.build;
-        let patternPath = answers.patternPath;
 
         if (buildfolder.startsWith('./')) {
           buildfolder = buildfolder.replace('./', '');
         } else if (buildfolder.startsWith('/')) {
           buildfolder = buildfolder.substring(1);
-        }
-
-        if (patternPath) {
-          if (patternPath.startsWith('/')) {
-            patternPath = `.${patternPath}`;
-          } else if (!patternPath.startsWith('./')) {
-            patternPath = `./${patternPath}`;
-          }
         }
 
         if (webRootPath.startsWith('/')) {
@@ -183,8 +156,6 @@ Are you sure you want to upgrade?`,
         this.webRootPath = webRootPath;
         this.buildFolder = buildfolder;
         this.buildPath = `${this.webRootPath}${this.buildFolder}`;
-        this.usePatternLibrary = answers.patternlibrary;
-        this.patternPath = patternPath;
         this.useTest = answers.useTest;
 
 
@@ -208,8 +179,6 @@ Are you sure you want to upgrade?`,
           buildFolder: this.buildFolder,
           webRootPath: this.webRootPath,
           buildPath: this.buildPath,
-          usePatternLibrary: this.usePatternLibrary,
-          patternPath: this.patternPath,
           openPath: this.useTest ? 'test' : '',
         };
       }
@@ -236,10 +205,6 @@ Are you sure you want to upgrade?`,
 
       if (this.copyAssets) {
         this._writingSource();
-      }
-
-      if (this.usePatternLibrary) {
-        this._writingPatternLibrary();
       }
 
       if (this.useTest) {
@@ -351,87 +316,6 @@ Are you sure you want to upgrade?`,
       this.templatePath('_source'),
       this.destinationPath(this.sourcePath)
     );
-  }
-
-  _writingPatternLibrary() {
-    this.fs.copy(
-      this.templatePath('_pattern-library-static'),
-      this.destinationPath(this.patternPath)
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/_00-head.twig'),
-      this.destinationPath(`${this.patternPath}/_meta/_00-head.twig`),
-      this.templateSettings
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/_01-foot.twig'),
-      this.destinationPath(`${this.patternPath}/_meta/_01-foot.twig`),
-      this.templateSettings
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/data.json'),
-      this.destinationPath(`${this.patternPath}/_data/data.json`),
-      this.templateSettings
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/config.yml'),
-      this.destinationPath('config/config.yml'),
-      this.templateSettings
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/listeners.json'),
-      this.destinationPath('config/listeners.json'),
-      this.templateSettings
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/patternengines.json'),
-      this.destinationPath('config/patternengines.json'),
-      this.templateSettings
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('_pattern-library-dynamic/pattern-scaffolding.scss'),
-      this.destinationPath(`${this.sourcePath}/css/pattern-scaffolding.scss`),
-      this.templateSettings
-    );
-
-    // Gitkeeps
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.patternPath}/_patterns/atoms/.gitkeep`)
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.patternPath}/_patterns/molecules/.gitkeep`)
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.patternPath}/_patterns/organisms/.gitkeep`)
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.patternPath}/_patterns/templates/.gitkeep`)
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.patternPath}/_twig-components/tags/.gitkeep`)
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(`${this.patternPath}/_twig-components/tests/.gitkeep`)
-    );
-
   }
 
   _writingTest() {

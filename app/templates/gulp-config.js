@@ -13,8 +13,7 @@ module.exports = {
   },
   paths: {
     tasks: '/tasks',
-    source: '<%= sourcePath %>',<% if (usePatternLibrary) { %>
-    patterns: '<%= patternPath %>',<% } %>
+    source: '<%= sourcePath %>',
     dist: '<%= buildPath %>',
     webroot: '<%= webRootPath %>',
     public: '<%= buildFolder %>',
@@ -28,7 +27,6 @@ module.exports = {
     },
   },
   copyAssets: true,
-  patternlibrary: <% if (usePatternLibrary) { %>true<% } else { %>false<% } %>,
   sync: {
     open: 'local',
     openPath: '/<%= openPath %>',
