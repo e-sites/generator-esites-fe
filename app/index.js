@@ -153,10 +153,12 @@ Are you sure you want to upgrade?`,
           buildfolder = buildfolder.substring(1);
         }
 
-        if (patternPath.startsWith('/')) {
-          patternPath = `.${patternPath}`;
-        } else if (!patternPath.startsWith('./')) {
-          patternPath = `./${patternPath}`;
+        if (patternPath) {
+          if (patternPath.startsWith('/')) {
+            patternPath = `.${patternPath}`;
+          } else if (!patternPath.startsWith('./')) {
+            patternPath = `./${patternPath}`;
+          }
         }
 
         if (webRootPath.startsWith('/')) {
