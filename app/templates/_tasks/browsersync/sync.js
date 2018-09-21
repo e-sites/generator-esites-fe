@@ -5,9 +5,11 @@ const tasker = require('gulp-tasker');
 
 const { paths, sync } = require(`${process.cwd()}/gulp-config.js`);
 let hosts = null;
+let openPath = null;
 
 try {
   hosts = JSON.parse(fs.readFileSync('./ebox.json')).hosts;
+  openPath = 'app_dev.php';
 } catch (e) {
   console.warn('Browsersync: No ebox.json present, using localhost instead of proxied host...');
 }
@@ -15,7 +17,7 @@ try {
 // Initialise browser-sync
 const serve = (done) => {
   const config = {
-    startPath: sync.openPath,
+    startPath: openPath || sync.openPath,
     open: sync.open,
     notify: {
       styles: [
@@ -61,7 +63,7 @@ const serve = (done) => {
   fileWatcher.on('add', reload);
   fileWatcher.on('change', reload);
 
-  const cssWatcher = gulp.watch(`${paths.dist}/**/styles.css`);
+  const cssWatcher = gulp.watch(`${paths.dist}/**/style.css`);
   cssWatcher.on('add', reloadCSS);
   cssWatcher.on('change', reloadCSS);
 

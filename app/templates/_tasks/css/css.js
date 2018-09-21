@@ -27,7 +27,7 @@ const cleancss = (done) => {
 
 const compilecss = () =>
   gulp
-    .src([`${paths.source + folder}/styles.scss`])
+    .src([`${paths.source + folder}/*.scss`])
     .pipe(handleError('sass', 'SASS compiling failed'))
     .pipe(gulpif(debug, sourcemaps.init()))
     .pipe(sass().on('error', sass.logError))

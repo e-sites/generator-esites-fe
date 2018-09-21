@@ -1,4 +1,3 @@
-const fs = require('fs');
 const Encore = require('@symfony/webpack-encore');
 
 const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
@@ -31,8 +30,7 @@ entries.forEach((entry) => {
 
 // Check for errors and exit the process
 if (env === 'production') {
-  Encore.addPlugin(function () {
-    // eslint-disable-line func-names, needed to expose `this`
+  Encore.addPlugin(function () { // eslint-disable-line func-names, needed to expose `this`
     this.plugin('done', (stats) => {
       if (stats.compilation.errors && stats.compilation.errors.length) {
         throw new Error('webpack build failed');

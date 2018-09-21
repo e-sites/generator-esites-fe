@@ -18,6 +18,10 @@ module.exports = class extends Generator {
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
 
+    if (Object.keys(projectConfig).length && !('version' in projectConfig)) {
+      this.log(yosay(`It seems that a ${chalk.rgb(244, 0, 77)('.yo-rc.json')} is present in the project. Some options are prefilled. Please check if they are correct.`));
+    }
+
     // Cache default prompts
     const prompts = [
       {
@@ -175,7 +179,7 @@ Are you sure you want to upgrade?`,
           buildFolder: this.buildFolder,
           webRootPath: this.webRootPath,
           buildPath: this.buildPath,
-          openFolder: this.useTest ? 'test' : '',
+          openPath: this.useTest ? 'test' : '',
         };
       }
     });
@@ -195,13 +199,11 @@ Are you sure you want to upgrade?`,
       this._writingStylelint();
 
       if (this.copyTasks) {
-        console.log('writing tasks');
         this._writingGulptasks();
         this._writingWebpack();
       }
 
       if (this.copyAssets) {
-        console.log('writing assets');
         this._writingSource();
       }
 
@@ -337,9 +339,9 @@ Are you sure you want to upgrade?`,
 
   end() {
     if (this.run) {
-      this.log(yosay(`${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+      this.log(yosay(`${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')}  or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
     } else {
-      this.log(yosay(`${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+      this.log(yosay(`${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
     }
   }
 };

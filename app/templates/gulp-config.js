@@ -26,11 +26,10 @@ module.exports = {
       mjml: '/path-to-mail',
     },
   },
-  copyAssets: false,
-  patternlib: false,
+  copyAssets: true,
   sync: {
     open: 'local',
-    openPath: '/<%= openFolder %>',
+    openPath: '/<%= openPath %>',
   },
   revisionFiles: true,
   mjml: {

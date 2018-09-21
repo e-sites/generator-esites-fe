@@ -24,6 +24,12 @@ const cleansvg = (done) => {
   done();
 };
 
+const copySVGS = () =>
+  gulp
+    .src(`${paths.source + paths.folders.svg}/**/*`)
+    .pipe(gulp.dest(`${paths.dist + paths.folders.svg}`))
+    .pipe(handleSuccess('copySVGS', 'SVG copying succeeded'));
+
 const svgconcat = () =>
   gulp
     .src(`${paths.source + folder}/**/*.svg`)
@@ -74,10 +80,11 @@ const svgconcat = () =>
     .pipe(gulpif(revisionFiles && !debug, gulp.dest(paths.dist + folder)))
     .pipe(handleSuccess('svgconcat', 'SVG concatenation succeeded'));
 
-const svgTask = gulp.series(cleansvg, svgconcat);
+const svgTaskDirty = gulp.series(copySVGS, svgconcat);
+const svgTask = gulp.series(cleansvg, copySVGS, svgconcat);
 
 gulp.task('svg', svgTask);
 
 tasker.addTask('default', svgTask);
 tasker.addTask('deploy', svgTask);
-tasker.addTask('watch', svgTask, `${paths.source + folder}/**/*.svg`);
+tasker.addTask('watch', svgTaskDirty, `${paths.source + folder}/**/*.svg`);
