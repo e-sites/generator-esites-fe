@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp watch",
     "serve": "gulp serve",
-    "build": "gulp"
+    "build": "NODE_ENV=production gulp"
   },
   "author": "E-sites <e-sites.nl>",
   "devDependencies": {
