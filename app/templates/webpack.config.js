@@ -1,3 +1,4 @@
+const ManifestPlugin = require('webpack-manifest-plugin');
 const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
 
 const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
@@ -49,8 +50,15 @@ module.exports = {
   },
 
   output: {
+    publicPath: `/${paths.public + folder}/`,
     filename: '[name].[contenthash].js',
   },
+
+  plugins: [
+    new ManifestPlugin({
+      basePath: `${paths.public + folder}/`,
+    }),
+  ],
 };
 
 
