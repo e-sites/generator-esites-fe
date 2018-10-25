@@ -1,19 +1,4 @@
 {
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": [
-            ">0.25% in NL",
-            "ie 11",
-            "not op_mini all"
-          ]
-        },
-        "debug": true
-      }
-    ],
-    "stage-3"
-  ],
+  "presets": ["@babel/preset-env"],
   "plugins": ["syntax-dynamic-import"]
 }
