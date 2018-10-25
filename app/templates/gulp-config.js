@@ -9,6 +9,7 @@ module.exports = {
       '@e-sites/vestigo',
       'scriptjs',
       'conditioner-core',
+      'validate',
     ],
   },
   paths: {

@@ -1,5 +1,7 @@
 const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
 
+const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+
 const folder = paths.folders.js;
 
 // Create entry points
@@ -8,12 +10,14 @@ entries.forEach((entry) => {
   entryPoints[entry.replace('.js', '')] = `${paths.source + folder}/${entry}`;
 });
 
+// Add vendor packages to vendor bundle
+entryPoints.vendor = vendor;
+
 // Export the config
 module.exports = {
+  mode: env,
+
   entry: entryPoints,
-  output: {
-    filename: '[name].js',
-  },
 
   module: {
     rules: [
@@ -26,6 +30,26 @@ module.exports = {
         },
       },
     ],
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true,
+        },
+      },
+    },
+    runtimeChunk: {
+      name: 'manifest',
+    },
+  },
+
+  output: {
+    filename: '[name].[contenthash].js',
   },
 };
 
