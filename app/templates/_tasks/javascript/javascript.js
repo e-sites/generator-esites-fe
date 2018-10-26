@@ -6,7 +6,8 @@ const fs = require('fs');
 const gulp = require('gulp');
 const del = require('del');
 const tasker = require('gulp-tasker');
-const webpack = require('webpack-stream');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 const notify = require('gulp-notify');
 const notifier = require('node-notifier'); // eslint-disable-line
 const webpackConfig = require('../../webpack.config.js');
@@ -21,7 +22,7 @@ const clean = (done) => {
 };
 
 const js = (allDone) => {
-  const stream = webpack(webpackConfig);
+  const stream = webpackStream(webpackConfig, webpack);
 
   return stream
     .on('error', notify.onError(error => error))
