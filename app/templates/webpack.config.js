@@ -51,7 +51,7 @@ module.exports = {
 
   output: {
     publicPath: `/${paths.public + folder}/`,
-    filename: '[name].[contenthash].js',
+    filename: revisionFiles ? '[name].[contenthash].js' : '[name].js',
   },
 
   plugins: [
