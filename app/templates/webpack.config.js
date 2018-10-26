@@ -1,9 +1,11 @@
+// Get dependencies/plugins
 const ManifestPlugin = require('webpack-manifest-plugin');
+
+// Get gonfig
 const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
 
-const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
-
 const folder = paths.folders.js;
+const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 // Create entry points
 const entryPoints = {};
@@ -11,7 +13,7 @@ entries.forEach((entry) => {
   entryPoints[entry.replace('.js', '')] = `${paths.source + folder}/${entry}`;
 });
 
-// Add vendor packages to vendor bundle
+// Add vendor packages to it's own vendor bundle
 entryPoints.vendor = vendor;
 
 // Export the config
@@ -34,6 +36,7 @@ module.exports = {
   },
 
   optimization: {
+    // Split vendor packages into our vendor bundle
     splitChunks: {
       cacheGroups: {
         vendor: {
