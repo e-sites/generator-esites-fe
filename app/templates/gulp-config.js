@@ -6,7 +6,6 @@ module.exports = {
     vendor: [
       '<%= sourcePath %>/js/polyfills/core-js',
       'svgxuse',
-      '@e-sites/vestigo',
       'scriptjs',
       'conditioner-core',
       'validate',
