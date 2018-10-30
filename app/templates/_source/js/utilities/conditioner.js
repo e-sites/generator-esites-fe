@@ -5,7 +5,7 @@
 import * as conditioner from 'conditioner-core';
 
 /**
- * Configure conditioner
+ * Configure conditioner to work with dynamic imports & webpack
  */
 conditioner.addPlugin({
   // converts module aliases to paths
