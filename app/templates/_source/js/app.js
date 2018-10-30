@@ -1,37 +1,26 @@
 /*!
- * @section: Application JS module entry file
- * @project: PROJECT-NAME
+ * Application JS module entry file
+ * Only imports here
+ *
  * @author: E-sites <frontend@e-sites.nl>
  */
 
-// Add ES5/6/7 polyfills
-import './polyfills/core-js';
-
-// Apply SVG polyfill to load external SVG's in unsupported browsers
+/**
+ * Add ES5/6/7 polyfills
+ * NOTE: Dont forget to add them to the `vendor` entry in `gulp-config.js`
+ */
+import 'core-js/web/dom-collections';
+import 'core-js/es6/object';
+import 'core-js/es6/array';
+import 'core-js/es6/promise';
+import 'core-js/stage/4';
+import 'element-closest';
 import 'svgxuse';
 
-import * as conditioner from 'conditioner-core';
-
-// Set external links
-import './utilities/setExtLinks';
-import './utilities/form-validation';
 
 /**
- * Configure conditioner
+ * Import our own handy dandy utilities
  */
-conditioner.addPlugin({
-  // converts module aliases to paths
-  moduleSetName: name => `${name}.js`,
-  // get the module constructor
-  moduleGetConstructor: module => module.default,
-  // override the import
-  moduleImport: name => import( // eslint-disable-line
-    /* https://webpack.js.org/api/module-methods/#import- */
-    /* set to "eager" to create a single chunk for all modules */
-    /* set to "lazy" to create a separate chunk for each module */
-    /* webpackChunkName: "[request]" */
-    /* webpackMode: "lazy" */
-    `./modules/${name}`),
-});
-
-conditioner.hydrate(document.documentElement);
+import './utilities/conditioner';
+import './utilities/setExtLinks';
+import './utilities/form-validation';
