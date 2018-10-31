@@ -2,7 +2,6 @@
 * Concats/minifies all JS files as defined in config.json under the 'build' key
  */
 
-const fs = require('fs');
 const gulp = require('gulp');
 const del = require('del');
 const tasker = require('gulp-tasker');
@@ -17,7 +16,7 @@ const { paths } = require(`${process.cwd()}/gulp-config.js`);
 const folder = paths.folders.js;
 
 const clean = (done) => {
-  del([`${paths.dist + folder}/*`]);
+  del([`${paths.dist}/**/*.{js,map}`]);
   done();
 };
 
@@ -26,7 +25,7 @@ const js = (allDone) => {
 
   return stream
     .on('error', notify.onError(error => error))
-    .pipe(gulp.dest(paths.dist + folder))
+    .pipe(gulp.dest(paths.dist))
     .on('close', () => {
       notifier.notify({
         title: 'js',

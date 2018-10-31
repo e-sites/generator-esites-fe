@@ -1,5 +1,4 @@
 // Gulp and some plugins that are used by multiple tasks
-const fs = require('fs');
 const gulp = require('gulp');
 const tasker = require('gulp-tasker');
 
