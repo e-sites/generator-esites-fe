@@ -34,6 +34,12 @@ module.exports = class extends Generator {
         },
       },
       {
+        type: 'confirm',
+        name: 'cms',
+        message: 'Are you scaffolding for a kunstmaan project?',
+        default: true,
+      },
+      {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
@@ -157,6 +163,7 @@ Are you sure you want to upgrade?`,
         this.buildFolder = buildfolder;
         this.buildPath = `${this.webRootPath}${this.buildFolder}`;
         this.useTest = answers.useTest;
+        this.useCms = answers.cms;
 
 
         /**
@@ -209,6 +216,11 @@ Are you sure you want to upgrade?`,
 
       if (this.useTest) {
         this._writingTest();
+      }
+
+      if (this.useCms) {
+        this._writingCmsViews();
+        this._writingCmsConfig();
       }
     }
   }
@@ -323,6 +335,20 @@ Are you sure you want to upgrade?`,
       this.templatePath('_test/index.html'),
       this.destinationPath(`${this.webRootPath}/test/index.html`),
       this.templateSettings
+    );
+  }
+
+  _writingCmsViews() {
+    this.fs.copy(
+      this.templatePath('_cms/views/'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views')
+    );
+  }
+
+  _writingCmsConfig() {
+    this.fs.copy(
+      this.templatePath('_cms/config/'),
+      this.destinationPath('./app/config')
     );
   }
 
