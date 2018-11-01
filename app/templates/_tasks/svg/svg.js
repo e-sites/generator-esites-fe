@@ -2,7 +2,6 @@
  * Does SVG stuff :)
  */
 
-const fs = require('fs');
 const gulp = require('gulp');
 const rev = require('gulp-rev');
 const tasker = require('gulp-tasker');
@@ -17,10 +16,8 @@ const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 
 const folder = paths.folders.svg;
 
-const debug = process.env.NODE_ENV !== 'production';
-
 const cleansvg = (done) => {
-  del([`${paths.dist + folder}/*`]);
+  del([`${paths.dist}/**/*.svg`]);
   done();
 };
 
@@ -86,7 +83,7 @@ const svgconcat = () =>
     ))
     .pipe(handleSuccess('svgconcat', 'SVG concatenation succeeded'));
 
-const svgTaskDirty = gulp.series(copySVGS, svgconcat);
+const svgTaskDirty = gulp.series(cleansvg, copySVGS, svgconcat);
 const svgTask = gulp.series(cleansvg, copySVGS, svgconcat);
 
 gulp.task('svg', svgTask);
