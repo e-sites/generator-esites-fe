@@ -71,7 +71,7 @@ const svgconcat = () =>
               cleanObject[`${key.replace(`${paths.public}/`, '')}`] = `${map[key]}`;
             });
 
-            return JSON.stringify(cleanObject);
+            return JSON.stringify(cleanObject, null, 2);
           },
           parse: map => JSON.parse(map),
         },
