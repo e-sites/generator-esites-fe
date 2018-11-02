@@ -194,6 +194,13 @@ Are you sure you want to upgrade?`,
 
   writing() {
     if (this.run) {
+
+      if (this.useCms) {
+        this._writingCmsViews();
+        this._writingCmsConfig();
+        this._writingCmsGitkeeps();
+      }
+
       this._writingGitkeeps();
       this._writingGitignore();
       this._writingEditorConfig();
@@ -216,11 +223,6 @@ Are you sure you want to upgrade?`,
 
       if (this.useTest) {
         this._writingTest();
-      }
-
-      if (this.useCms) {
-        this._writingCmsViews();
-        this._writingCmsConfig();
       }
     }
   }
@@ -338,9 +340,13 @@ Are you sure you want to upgrade?`,
     );
   }
 
+  /**
+   * CMS stuff
+   */
+
   _writingCmsViews() {
     this.fs.copy(
-      this.templatePath('_cms/views/'),
+      this.templatePath('_cms/views'),
       this.destinationPath('./src/Esites/WebsiteBundle/Resources/views')
     );
   }
@@ -349,6 +355,21 @@ Are you sure you want to upgrade?`,
     this.fs.copy(
       this.templatePath('_cms/config/'),
       this.destinationPath('./app/config')
+    );
+  }
+
+  _writingCmsGitkeeps() {
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms/.gitkeep')
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules/.gitkeep')
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms/.gitkeep')
     );
   }
 
