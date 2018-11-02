@@ -14,6 +14,7 @@ module.exports = class extends Generator {
     this.upgrade = false;
     this.copyAssets = true;
     this.copyTasks = true;
+    this.copyCmsStuff = true;
 
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
@@ -133,7 +134,7 @@ Are you sure you want to upgrade?`,
             type: 'checkbox',
             name: 'upgradeTypes',
             message: 'What do you want to upgrade?',
-            choices: ['tasks', 'assets'],
+            choices: ['tasks', 'assets', 'cmsstuff'],
             default: ['tasks'],
             when: (answers) => {
               return ('upgrade' in answers) ? answers.upgrade : true;
@@ -156,6 +157,7 @@ Are you sure you want to upgrade?`,
       if ('upgradeTypes' in answers) {
         this.copyTasks = answers.upgradeTypes.includes('tasks');
         this.copyAssets = answers.upgradeTypes.includes('assets');
+        this.copyCmsStuff = answers.upgradeTypes.includes('cmsstuff');
       }
 
       if (this.run) {
@@ -227,7 +229,7 @@ Are you sure you want to upgrade?`,
 
   writing() {
     if (this.run) {
-      if (this.useCms) {
+      if (this.useCms && this.copyCmsStuff) {
         this._writingCmsViews();
         this._writingCmsApp();
         this._writingCmsGitkeeps();
