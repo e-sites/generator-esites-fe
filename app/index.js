@@ -229,7 +229,7 @@ Are you sure you want to upgrade?`,
     if (this.run) {
       if (this.useCms) {
         this._writingCmsViews();
-        this._writingCmsConfig();
+        this._writingCmsApp();
         this._writingCmsGitkeeps();
       }
 
@@ -383,10 +383,10 @@ Are you sure you want to upgrade?`,
     );
   }
 
-  _writingCmsConfig() {
+  _writingCmsApp() {
     this.fs.copy(
-      this.templatePath('_cms/config/'),
-      this.destinationPath('./app/config')
+      this.templatePath('_cms/app'),
+      this.destinationPath('./app')
     );
   }
 
