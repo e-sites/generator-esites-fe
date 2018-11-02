@@ -37,13 +37,26 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'cms',
         message: 'Are you scaffolding for a kunstmaan project?',
-        default: true,
+        default: projectConfig.cms,
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
       },
       {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
-        default: projectConfig.source ? projectConfig.source : './source',
+        default: (answers) => {
+          let string = './source';
+
+          if (projectConfig.source) {
+            string = projectConfig.source;
+          } else if (answers.cms) {
+            string = './src/Esites/WebsiteBundle/Resources/ui';
+          }
+
+          return string;
+        },
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -52,7 +65,17 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'webroot',
         message: 'Your web root folder?',
-        default: projectConfig.webroot ? projectConfig.webroot : './',
+        default: (answers) => {
+          let string = './';
+
+          if (projectConfig.webroot) {
+            string = projectConfig.webroot;
+          } else if (answers.cms) {
+            string = './web';
+          }
+
+          return string;
+        },
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -61,7 +84,17 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'build',
         message: 'Your build folder? (relative to web root)',
-        default: projectConfig.build ? projectConfig.build : 'build',
+        default: (answers) => {
+          let string = 'build';
+
+          if (projectConfig.build) {
+            string = projectConfig.build;
+          } else if (answers.cms) {
+            string = 'frontend';
+          }
+
+          return string;
+        },
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -194,7 +227,6 @@ Are you sure you want to upgrade?`,
 
   writing() {
     if (this.run) {
-
       if (this.useCms) {
         this._writingCmsViews();
         this._writingCmsConfig();
