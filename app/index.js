@@ -14,6 +14,7 @@ module.exports = class extends Generator {
     this.upgrade = false;
     this.copyAssets = true;
     this.copyTasks = true;
+    this.copyCmsStuff = true;
 
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
@@ -34,10 +35,29 @@ module.exports = class extends Generator {
         },
       },
       {
+        type: 'confirm',
+        name: 'cms',
+        message: 'Are you scaffolding for a kunstmaan project?',
+        default: projectConfig.cms,
+        when: (answers) => {
+          return ('upgrade' in answers) ? answers.upgrade : true;
+        },
+      },
+      {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
-        default: projectConfig.source ? projectConfig.source : './source',
+        default: (answers) => {
+          let string = './source';
+
+          if (projectConfig.source) {
+            string = projectConfig.source;
+          } else if (answers.cms) {
+            string = './src/Esites/WebsiteBundle/Resources/ui';
+          }
+
+          return string;
+        },
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -46,7 +66,17 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'webroot',
         message: 'Your web root folder?',
-        default: projectConfig.webroot ? projectConfig.webroot : './',
+        default: (answers) => {
+          let string = './';
+
+          if (projectConfig.webroot) {
+            string = projectConfig.webroot;
+          } else if (answers.cms) {
+            string = './web';
+          }
+
+          return string;
+        },
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -55,7 +85,17 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'build',
         message: 'Your build folder? (relative to web root)',
-        default: projectConfig.build ? projectConfig.build : 'build',
+        default: (answers) => {
+          let string = 'build';
+
+          if (projectConfig.build) {
+            string = projectConfig.build;
+          } else if (answers.cms) {
+            string = 'frontend';
+          }
+
+          return string;
+        },
         when: (answers) => {
           return ('upgrade' in answers) ? answers.upgrade : true;
         },
@@ -94,7 +134,7 @@ Are you sure you want to upgrade?`,
             type: 'checkbox',
             name: 'upgradeTypes',
             message: 'What do you want to upgrade?',
-            choices: ['tasks', 'assets'],
+            choices: ['tasks', 'assets', 'cmsstuff'],
             default: ['tasks'],
             when: (answers) => {
               return ('upgrade' in answers) ? answers.upgrade : true;
@@ -117,6 +157,7 @@ Are you sure you want to upgrade?`,
       if ('upgradeTypes' in answers) {
         this.copyTasks = answers.upgradeTypes.includes('tasks');
         this.copyAssets = answers.upgradeTypes.includes('assets');
+        this.copyCmsStuff = answers.upgradeTypes.includes('cmsstuff');
       }
 
       if (this.run) {
@@ -157,6 +198,7 @@ Are you sure you want to upgrade?`,
         this.buildFolder = buildfolder;
         this.buildPath = `${this.webRootPath}${this.buildFolder}`;
         this.useTest = answers.useTest;
+        this.useCms = answers.cms;
 
 
         /**
@@ -187,6 +229,12 @@ Are you sure you want to upgrade?`,
 
   writing() {
     if (this.run) {
+      if (this.useCms && this.copyCmsStuff) {
+        this._writingCmsViews();
+        this._writingCmsApp();
+        this._writingCmsGitkeeps();
+      }
+
       this._writingGitkeeps();
       this._writingGitignore();
       this._writingEditorConfig();
@@ -323,6 +371,39 @@ Are you sure you want to upgrade?`,
       this.templatePath('_test/index.html'),
       this.destinationPath(`${this.webRootPath}/test/index.html`),
       this.templateSettings
+    );
+  }
+
+  /**
+   * CMS stuff
+   */
+
+  _writingCmsViews() {
+    this.fs.copy(
+      this.templatePath('_cms/views'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views')
+    );
+  }
+
+  _writingCmsApp() {
+    this.fs.copy(
+      this.templatePath('_cms/app'),
+      this.destinationPath('./app')
+    );
+  }
+
+  _writingCmsGitkeeps() {
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms/.gitkeep')
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules/.gitkeep')
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms/.gitkeep')
     );
   }
 

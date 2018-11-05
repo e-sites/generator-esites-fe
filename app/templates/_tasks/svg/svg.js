@@ -2,7 +2,6 @@
  * Does SVG stuff :)
  */
 
-const fs = require('fs');
 const gulp = require('gulp');
 const rev = require('gulp-rev');
 const tasker = require('gulp-tasker');
@@ -17,10 +16,8 @@ const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 
 const folder = paths.folders.svg;
 
-const debug = process.env.NODE_ENV !== 'production';
-
 const cleansvg = (done) => {
-  del([`${paths.dist + folder}/*`]);
+  del([`${paths.dist}/**/*.svg`]);
   done();
 };
 
@@ -55,32 +52,38 @@ const svgconcat = () =>
     ]))
     .pipe(handleError('svgconcat', 'SVG concatenation failed'))
     .pipe(rename('dist.svg'))
-    .pipe(gulpif(revisionFiles && !debug, rev()))
-    .pipe(gulp.dest(paths.dist + folder))
+    .pipe(gulpif(revisionFiles, rev()))
+    .pipe(gulp.dest(paths.dist))
+    .pipe(gulpif(revisionFiles, rename({
+      dirname: `${paths.public}`,
+    })))
     .pipe(gulpif(
-      revisionFiles && !debug,
-      rev.manifest({
+      revisionFiles,
+      rev.manifest(`${paths.dist}/manifest.json`, {
+        base: paths.public,
         merge: true,
-        path: 'manifest.json',
         transformer: {
           stringify: (map) => {
+            const cleanObject = {};
             const keys = Object.keys(map);
 
-            keys.map((key) => {
-              map[`${paths.public + folder}/${key}`] = `/${paths.public + folder}/${map[key]}`;
-              delete map[key];
-              return key;
+            keys.forEach((key) => {
+              cleanObject[`${key.replace(`${paths.public}/`, '')}`] = `${map[key]}`;
             });
 
-            return JSON.stringify(map);
+            return JSON.stringify(cleanObject, null, 2);
           },
+          parse: map => JSON.parse(map),
         },
       })
     ))
-    .pipe(gulpif(revisionFiles && !debug, gulp.dest(paths.dist + folder)))
+    .pipe(gulpif(
+      revisionFiles,
+      gulp.dest(paths.public)
+    ))
     .pipe(handleSuccess('svgconcat', 'SVG concatenation succeeded'));
 
-const svgTaskDirty = gulp.series(copySVGS, svgconcat);
+const svgTaskDirty = gulp.series(cleansvg, copySVGS, svgconcat);
 const svgTask = gulp.series(cleansvg, copySVGS, svgconcat);
 
 gulp.task('svg', svgTask);

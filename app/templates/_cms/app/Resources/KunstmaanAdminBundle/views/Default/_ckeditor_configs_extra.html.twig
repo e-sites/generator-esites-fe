@@ -1,0 +1,31 @@
+<script>
+
+	// Override Kunstmaan CKEditor config
+	ckEditorConfigs.custom = {
+		skin: 'bootstrapck',
+		startupFocus: false,
+		bodyClass: 'CKEditor',
+		filebrowserWindowWidth: 970,
+		filebrowserImageWindowWidth: 970,
+		filebrowserImageUploadUrl: '',
+		extraAllowedContent: 'div(*); iframe(*)[*];',
+		format_tags: 'p;h2;h3;h4',
+    // stylesSet: [
+    //  { name: 'Intro', element: 'p', attributes: { 'class': 'text-intro' } }
+    // ],
+    contentsCss: '{{ asset('ckeditor.css') }}',
+		toolbar: [
+			{name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat']},
+			{name: 'styles', items: ['Format']},
+			{name: 'lists', items: ['NumberedList', 'BulletedList']},
+			{name: 'dents', items: ['Outdent', 'Indent']},
+			{name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+			{name: 'insert', items: ['Image', 'Table', 'SpecialChar']},
+			{name: 'clipboard', items: ['SelectAll', 'Cut', 'Copy', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+			{name: 'editing', items: []},
+			{name: 'document', items: ['Source']}
+		],
+		allowedContent: true,
+	};
+
+</script>

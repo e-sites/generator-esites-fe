@@ -2,8 +2,8 @@
  * Compiles the main styles.scss file and creates a source-map
  */
 
-const fs = require('fs');
 const gulp = require('gulp');
+const rename = require('gulp-rename');
 const rev = require('gulp-rev');
 const gulpif = require('gulp-if');
 const del = require('del');
@@ -21,7 +21,7 @@ const folder = paths.folders.css;
 const debug = process.env.NODE_ENV !== 'production';
 
 const cleancss = (done) => {
-  del([`${paths.dist + folder}/*`]);
+  del([`${paths.dist}/**/*.{css,css.map}`]);
   done();
 };
 
@@ -35,30 +35,36 @@ const compilecss = () =>
       level: debug ? 0 : 2,
     }))
     .pipe(autoprefixer())
-    .pipe(gulpif(revisionFiles && !debug, rev()))
+    .pipe(gulpif(revisionFiles, rev()))
     .pipe(gulpif(debug, sourcemaps.write('./')))
-    .pipe(gulp.dest(paths.dist + folder))
+    .pipe(gulp.dest(paths.dist))
+    .pipe(gulpif(revisionFiles, rename({
+      dirname: `${paths.public}`,
+    })))
     .pipe(gulpif(
-      revisionFiles && !debug,
-      rev.manifest({
+      revisionFiles,
+      rev.manifest(`${paths.dist}/manifest.json`, {
+        base: paths.public,
         merge: true,
-        path: 'manifest.json',
         transformer: {
           stringify: (map) => {
+            const cleanObject = {};
             const keys = Object.keys(map);
 
-            keys.map((key) => {
-              map[`${paths.public + folder}/${key}`] = `/${paths.public + folder}/${map[key]}`;
-              delete map[key];
-              return key;
+            keys.forEach((key) => {
+              cleanObject[`${key.replace(`${paths.public}/`, '')}`] = `${map[key]}`;
             });
 
-            return JSON.stringify(map);
+            return JSON.stringify(cleanObject, null, 2);
           },
+          parse: map => JSON.parse(map),
         },
       })
     ))
-    .pipe(gulpif(revisionFiles, gulp.dest(paths.dist + folder)))
+    .pipe(gulpif(
+      revisionFiles,
+      gulp.dest(paths.public)
+    ))
     .pipe(handleSuccess('sass', 'SASS compiling succeeded'));
 
 const cssTask = gulp.series(cleancss, compilecss);

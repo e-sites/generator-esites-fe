@@ -1,5 +1,5 @@
 // Get dependencies/plugins
-const ManifestPlugin = require('webpack-manifest-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 // Get gonfig
 const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
@@ -53,13 +53,17 @@ module.exports = {
   },
 
   output: {
-    publicPath: `/${paths.public + folder}/`,
-    filename: revisionFiles ? '[name].[contenthash].js' : '[name].js',
+    publicPath: `/${paths.public}/`,
+    filename: (revisionFiles) ? '[name].[contenthash].js' : '[name].js',
   },
 
-  plugins: [
-    new ManifestPlugin({
-      basePath: `${paths.public + folder}/`,
-    }),
-  ],
+  plugins: [],
 };
+
+if (revisionFiles) {
+  module.exports.plugins.push(new WebpackAssetsManifest({
+    output: `${paths.dist}/manifest.json`,
+    publicPath: `${paths.public}/`,
+    merge: true,
+  }));
+}
