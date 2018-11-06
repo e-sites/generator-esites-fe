@@ -235,8 +235,11 @@ Are you sure you want to upgrade?`,
         this._writingCmsGitkeeps();
       }
 
+      if (!this.useCms) {
+        this._writingGitignore();
+      }
+
       this._writingGitkeeps();
-      this._writingGitignore();
       this._writingEditorConfig();
       this._writingBrowserslist();
       this._writingPackage();
