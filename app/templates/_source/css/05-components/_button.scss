@@ -9,8 +9,7 @@
  * Block
  * ======================================
  */
-.btn,
-#{$all-buttons} {
+.c-button {
   @include btn;
 }
 
