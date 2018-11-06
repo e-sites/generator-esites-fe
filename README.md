@@ -34,6 +34,8 @@ If you already have these packages installed, you can upgrade them:
 npm update -g yo generator-esites-fe
 ```
 
+**Note**: If you use this generator in a Kunstmaan project please check the [Kunstmaan CMS installation](#kunstmaan-cms-installation) guide.
+
 **Note**: Mac users need to run above commands with `sudo`.
 
 ## Usage
@@ -47,6 +49,36 @@ Please make sure your system meets the [prerequisites](#prerequisites).
 ## Options
 - `--skip-install`
   Skips the automatic execution of `npm` after scaffolding has finished.
+
+## Kunstmaan CMS installation
+At E-sites we’re running a CMS called [Kunstmaan bundles for Symfony](https://bundles.kunstmaan.be/).
+
+During installation of this front-end setup you’ll get the question "Are you scaffolding for a kunstmaan project?". If you choose `yes` we’re assuming you already have installed a clean Kunstmaan project through [the installation guide](https://kunstmaanbundlescms.readthedocs.io/en/latest/installation/).
+
+By default Kunstmaan installs their own front-end tooling named `groundcontrol`.
+It is advised to remove all groundcontrol files before running this yeoman generator to ensure you’ll have the most clean start point of your project.
+
+Files & folders which you need to **remove**:
+
+- `groundcontrol`
+- `package.json`
+- `package-lock.json`
+- `.babelrc`
+- `.eslintrc`
+- `.jshintrc`
+- `.nvmrc`
+- `.stylelintrc`
+- `gulpfile.babel.js`
+- `src/Esites/WebsiteBundle/Resources/ui`
+
+**Note**: It is recommended that you remove these files but if you don’t, dont worry! The generator will prompt you when there are conflicts on the files.
+
+Files you need to alter:
+
+- `.gitignore`: change `web/frontend/*/*` to `web/frontend/**/*`
+- `app/config/config.yml`: add `- { resource: config_frontend.yml }` parameter to `imports`
+- `app/config/config.yml`: remove the `framework.assets` parameter
+
 
 ## Contribute
 
