@@ -3,10 +3,5 @@
  * Global variables, config switches.
  */
 
-@import 'bourbon-settings';
-@import 'typography';
-@import 'spacing';
-@import 'colors';
-@import 'animations';
-@import 'responsive';
-@import 'selectors';
+@import 'node_modules/supple/lib/settings/defaults';
+@import 'vars';

@@ -1,12 +1,25 @@
-/**
- * tools
- * Default mixins and functions.
- */
+/*  =========================================================================
+    tools
+    Default mixins and functions.
+    ========================================================================= */
 
-// Vendor tools
-@import 'node_modules/bourbon/core/bourbon';
+/*  Vendor
+    ========================================================================= */
+
 @import 'node_modules/sass-mq/mq';
+@import 'node_modules/supple/lib/tools/functions';
+@import 'node_modules/supple/lib/tools/mixins';
 
-// Project specific tools
-@import 'functions/_functions';
-@import 'mixins/_mixins';
+
+
+/*  Functions
+    ========================================================================= */
+
+// @import 'functions/YOUR-OWN-FILE';
+
+
+
+/*  Mixins
+    ========================================================================= */
+
+@import 'mixins/shared-input';

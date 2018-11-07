@@ -4,5 +4,6 @@
  */
 
 @import 'node_modules/normalize.css/normalize';
-@import 'box-sizing';
-@import 'reset';
+
+@import "node_modules/supple/lib/generic/normalize";
+@import "node_modules/supple/lib/generic/reset";
