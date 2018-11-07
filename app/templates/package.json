@@ -58,6 +58,7 @@
     "element-closest": "^2.0.2",
     "normalize.css": "^8.0.0",
     "sass-mq": "^5.0.0",
+    "supple": "https://github.com/supple-css/supple.git#feature/scss",
     "svgxuse": "^1.2.6"
   }
 }
