@@ -8,7 +8,7 @@ const formValidation = {
     validate.init({
       selector: '[data-validate]',
       fieldClass: 'is-invalid',
-      errorClass: 'error-message',
+      errorClass: 'c-form__error',
     });
   },
 };
