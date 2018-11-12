@@ -1,55 +1,37 @@
-/**
- * components.button
- * Button selectors, only mapping selectors to mixins located in:
- * 01-tools/mixins/_button-styles.scss
- */
+/*  =========================================================================
+    components.button
+    Buttons communicate the action that will occur when the user touches them.
+    ========================================================================= */
+
+/*  Variables
+    ========================================================================= */
+
+
+
+/*  Functions/Mixins
+    ========================================================================= */
+
+
+
+/*  Module
+    ========================================================================= */
 
 /**
- * ======================================
- * Block
- * ======================================
+ * 1. Get the base styles from the shared input mixin
+ * 1. remove text-decoration from other possible interactive elements
+ * 2. Opinionated pointer cursor
  */
 .c-button {
-  @include btn;
+  @include shared-input; /* [1] */
+  margin: 0;
+  text-decoration: none; /* [2] */
+  cursor: pointer; /* [3] */
+  background-color: $color-brand-primary;
+  color: $color-white;
+
+  #{$all-hovers} {
+    color: $color-brand-primary;
+    background-color: $color-white;
+    border-color: currentColor;
+  }
 }
-
-/**
- * ======================================
- * Type classes
- * Uncomment the ones you need in the project
- * ======================================
- */
-
-// .btn-secondary {
-//   @include btn;
-//   @include btn-secondary;
-// }
-
-// .btn-tertiary {
-//   @include btn;
-//   @include btn-tertiary;
-// }
-
-// .btn-ghost {
-//   @include btn;
-//   @include btn-ghost;
-// }
-
-// .btn-ghost-primary {
-//   @include btn;
-//   @include btn-ghost-primary;
-// }
-
-// .btn-ghost-secondary {
-//   @include btn;
-//   @include btn-ghost-secondary;
-// }
-
-// .btn-ghost-tertiary {
-//   @include btn;
-//   @include btn-ghost-tertiary;
-// }
-
-// .btn-clean {
-//   @include btn-clean;
-// }
