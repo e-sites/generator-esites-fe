@@ -1,7 +1,8 @@
 /*  =========================================================================
-    settings
-    Global variables, config switches.
+    elements
+    Unclassed HTML element selectors
     ========================================================================= */
 
-@import 'node_modules/supple/lib/settings/defaults';
-@import 'vars';
+@import 'typography';
+@import 'links';
+@import 'rule';
