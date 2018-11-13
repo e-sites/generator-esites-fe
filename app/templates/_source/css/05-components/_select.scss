@@ -1,5 +1,5 @@
 /*  =========================================================================
-    components.input-text
+    components.select
     ========================================================================= */
 
 /*  Variables
@@ -16,25 +16,21 @@
     ========================================================================= */
 
 /**
- * Block: input-text
+ * Block: select
+ */
+.c-select {
+  position: relative;
+}
+
+
+/**
+ * Element: input
  * 1. Relies on the `shared-input` mixin in `01-tools/mixins/_shared-input.scss`
  */
-.c-input-text {
+.c-select__input {
   @include shared-input; /* [1] */
   border-color: currentColor;
   color: $color-gray-900;
-
-  /**
-   * State: valid/invalid
-   * 1. Shit needs to be immutable
-   */
-  &.is-valid {
-    border-color: $color-success !important; /* [1] */
-  }
-
-  &.is-invalid {
-    border-color: $color-error !important; /* [1] */
-  }
 
   /**
    * State: disabled
@@ -46,9 +42,4 @@
     background-color: $color-gray-100 !important; /* [1] */
     cursor: not-allowed;
   }
-
-  &::placeholder {
-    color: $color-gray-500;
-  }
 }
-
