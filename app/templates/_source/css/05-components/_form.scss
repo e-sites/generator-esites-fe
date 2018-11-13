@@ -42,8 +42,10 @@
 
 /**
  * Element: error
+ * 1. Margin top because the validation plugin inserts the container directly
+ *    below the field
  */
 .c-form__error {
+  @include supple-rem(margin-top, $supple-space-tiny); /* [1] */
   color: $color-error;
-  @include supple-rem(margin-top, $supple-space-tiny);
 }
