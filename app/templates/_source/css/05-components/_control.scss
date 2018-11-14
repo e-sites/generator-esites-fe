@@ -1,0 +1,90 @@
+/*  =========================================================================
+    components.control
+    Checkboxes & Radio buttons
+    ========================================================================= */
+
+/*  Variables
+    ========================================================================= */
+
+$c-control-space: $supple-space * 1.5 !default;
+$c-control-width: $supple-space !default;
+$c-control-line-height: $supple-space !default;
+$c-control-border-color: $color-gray-900 !default;
+$c-control-indicator-active-color: $color-white !default;
+$c-control-indicator-active-background-color: $color-brand-primary !default;
+$c-control-indicator-focus-color: $color-brand-primary !default;
+
+
+
+/*  Functions/Mixins
+    ========================================================================= */
+
+
+
+/*  Module
+    ========================================================================= */
+
+.c-control {
+  position: relative;
+  display: inline-block;
+  @include supple-rem(padding-left, $c-control-space);
+  @include supple-rem(line-height, $c-control-line-height);
+}
+
+
+/**
+ * Element: input
+ * Actual input, is hidden from view with `u-visually-hidden`
+ */
+.c-control__input {
+  // empty for reference
+}
+
+/**
+ * Element: indicator
+ */
+.c-control__indicator {
+  position: absolute;
+  display: block;
+  @include supple-rem(top, $c-control-line-height/2);
+  left: 0;
+  @include supple-rem(width, $c-control-width);
+  @include supple-rem(height, $c-control-width);
+  @include supple-rem(line-height, $c-control-width);
+  transform: translateY(-50%);
+  border: 1px solid $color-gray-900;
+  text-align: center;
+  color: $c-control-indicator-active-color;
+  background-color: $c-control-indicator-active-color;
+  user-select: none;
+
+  .c-control__input:checked ~ & {
+    background-color: $c-control-indicator-active-background-color;
+  }
+
+  .c-control__input:focus ~ & {
+    border-color: $c-control-indicator-focus-color;
+  }
+}
+
+
+/**
+ * Modifier: radio
+ */
+.c-control--radio {
+  .c-control__indicator {
+    border-radius: 50%;
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      height: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $c-control-indicator-active-color;
+      content: '';
+      border-radius: 50%;
+    }
+  }
+}
