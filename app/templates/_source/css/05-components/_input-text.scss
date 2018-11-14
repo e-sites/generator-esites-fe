@@ -24,6 +24,10 @@
   border-color: currentColor;
   color: $color-gray-900;
 
+  #{$all-hovers} {
+    border-color: $color-brand-primary;
+  }
+
   /**
    * State: valid/invalid
    * 1. Shit needs to be immutable
