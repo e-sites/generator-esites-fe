@@ -34,4 +34,8 @@ $shared-input-padding-horizontal: $supple-space !default;
   transition-duration: $base-animation-duration;
   transition-timing-function: $base-animation-timing;
   font: inherit; /* [1] */
+
+  &:focus {
+    @include generic-focus;
+  }
 }
