@@ -1,6 +1,6 @@
 {
   "name": "generator-esites-fe",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Yeoman generator for E-sites frontend",
   "main": "index.js",
   "scripts": {
@@ -28,13 +28,13 @@
   "dependencies": {
     "@e-sites/eslint-config": "^2.0.0",
     "babel-eslint": "^8.2.3",
-    "chalk": "^2.4.1",
-    "compare-versions": "^3.1.0",
+    "chalk": "^2.4.2",
+    "compare-versions": "^3.4.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "slugify": "^1.2.9",
-    "yeoman-generator": "^2.0.5",
+    "eslint-plugin-import": "^2.16.0",
+    "slugify": "^1.3.4",
+    "yeoman-generator": "^3.2.0",
     "yosay": "^2.0.2"
   }
 }

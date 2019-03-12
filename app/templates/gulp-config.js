@@ -2,6 +2,7 @@ module.exports = {
   js: {
     entries: [
       'app.js',
+      'admin.js',
     ],
     vendor: [
       'core-js/web/dom-collections',
