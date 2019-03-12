@@ -1,15 +1,100 @@
-/*! E-sites | https://e-sites.nl */
+/*! E-sites | e-sites.nl */
 
-/**
- * Styles
- * Base manifest file for your project.
- * In conjunction with bourbon 5: http://bourbon.io.
- */
+/*  =========================================================================
+    Settings
+    Global variables, config switches.
+    ========================================================================= */
 
-@import '00-settings/_settings';
-@import '01-tools/_tools';
-@import '02-generic/_generic';
-@import '03-base/_base';
-@import '04-objects/_objects';
-@import '05-components/_components';
-@import '06-trumps/_trumps';
+@import '00-settings/vars';
+@import 'supple/lib/settings/defaults';
+@import 'supple/lib/settings/responsive';
+
+
+
+
+
+/*  =========================================================================
+    Tools
+    Default mixins and functions.
+    ========================================================================= */
+
+@import 'sass-mq/mq';
+@import 'supple/lib/tools/functions';
+@import 'supple/lib/tools/mixins';
+@import '01-tools/mixins/shared-input';
+@import '01-tools/mixins/generic-focus';
+
+
+
+
+
+/*  =========================================================================
+    Generic
+    Ground zero styles (normalize.css, box-sizing, resets).
+    ========================================================================= */
+
+@import "supple/lib/generic/normalize";
+@import "supple/lib/generic/reset";
+
+
+
+
+
+/*  =========================================================================
+    Elements
+    Unclassed HTML element selectors
+    ========================================================================= */
+
+@import '03-elements/typography';
+@import '03-elements/links';
+@import '03-elements/rule';
+@import '03-elements/label';
+
+
+
+
+
+/*  =========================================================================
+    Objects
+    This layer is concerned with styling non-cosmetic design patterns.
+    Prefixed with `o-`
+    ========================================================================= */
+
+@import 'supple/lib/objects/list-clean';
+@import 'supple/lib/objects/layout';
+@import 'supple/lib/objects/retain';
+@import 'supple/lib/objects/flexembed';
+
+
+
+
+
+/*  =========================================================================
+    Components
+    This layer contains our recognisable components, chunks of UI.
+    Prefixed with `c-`
+    ========================================================================= */
+
+@import '05-components/button';
+@import '05-components/input-text';
+@import '05-components/select';
+@import '05-components/control';
+@import '05-components/form';
+@import '05-components/choice';
+
+
+
+
+
+/*  =========================================================================
+    Utilities
+    This layer contains some handy helpers & overrides
+    Prefixed with `u-`
+    ========================================================================= */
+
+// @import 'supple/lib/utilities/fractions';
+// @import 'supple/lib/utilities/float';
+@import 'supple/lib/utilities/module';
+// @import 'supple/lib/utilities/spacing';
+@import 'supple/lib/utilities/visually-hidden';
+// @import 'supple/lib/utilities/hidden';

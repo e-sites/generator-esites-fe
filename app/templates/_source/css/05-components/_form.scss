@@ -1,0 +1,51 @@
+/*  =========================================================================
+    components.form
+    Basic styling for form fields, labels, etc.
+    ========================================================================= */
+
+/*  Variables
+    ========================================================================= */
+
+
+
+/*  Functions/Mixins
+    ========================================================================= */
+
+
+
+/*  Module
+    ========================================================================= */
+
+.c-form {
+  @include supple-rem(margin-bottom, $supple-space);
+}
+
+
+/**
+ * Element: row
+ */
+.c-form__row {
+  @include supple-rem(margin-bottom, $supple-space);
+}
+
+
+/**
+ * Element: wraps
+ */
+.c-form__wrap-label,
+.c-form__wrap-hint,
+.c-form__wrap-input,
+.c-form__wrap-error {
+  @include supple-rem(margin-bottom, $supple-space-tiny);
+}
+
+
+/**
+ * Element: error
+ * 1. Margin top because the validation plugin inserts the container directly
+ *    below the field
+ */
+.c-form__error {
+  @include supple-rem(margin-top, $supple-space-tiny); /* [1] */
+  color: $color-error;
+}

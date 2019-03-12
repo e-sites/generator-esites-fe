@@ -13,7 +13,7 @@ module.exports = {
       'element-closest',
       'svgxuse',
       'conditioner-core',
-      'validate',
+      'formbouncerjs',
     ],
   },
   paths: {

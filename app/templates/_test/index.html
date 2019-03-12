@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>frontend test file - <%= projectName %></title>
+  <title>frontend test file - yeoman-test</title>
   <script>document.documentElement.className += ' js'; var app = {}, fs = {};</script>
-  <link rel="stylesheet" href="../<%= buildFolder %>/css/style.css">
+  <link rel="stylesheet" href="../build/style.css">
 
   <style>
     /* stylelint-disable */
@@ -140,7 +140,7 @@
       <h3 class="test__describe">button</h3>
       <div class="test__run">
         <p>
-          <button type="button">Button content</button>
+          <button class="c-button" type="button">Button content</button>
         </p>
       </div><!-- .test__run -->
 
@@ -148,48 +148,168 @@
       <h4 class="test__it">has no focus outline (try clicking to trigger focus)</h4>
       <div class="test__run">
         <a href="#_" tabindex="-1">Link content</a>
-        <button type="button" tabindex="-1">Button content</button>
+        <button class="c-button" type="button" tabindex="-1">Button content</button>
       </div><!-- .test__run -->
 
       <h3 class="test__describe">Forms</h3>
       <!-- <h4 class="test__it">has no focus outline (try clicking to trigger focus)</h4> -->
       <div class="test__run">
-        <form action="" data-validate>
-          <fieldset>
+        <form class="c-form" action="" data-validate>
+          <fieldset class="c-form__fieldset  u-module">
             <legend>Legend</legend>
 
-            <label for="text-input">Label for input</label>
-            <input type="text" id="text-input" name="text-input" placeholder="Placeholder text">
+            <div class="c-form__row  has-error  u-module">
+              <div class="c-form__wrap-label">
+                <label for="text-input">Label for input <small>Optional</small></label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <input class="c-input-text  is-invalid" type="text" id="text-input" name="text-input" placeholder="Placeholder text">
+              </div>
+              <div class="c-form__wrap-error">
+                <span class="c-form__error">Facilis autem vel enim iste temporibus</span>
+              </div>
+            </div>
 
-            <label for="text-input-required">Label for required input *</label>
-            <input type="text" id="text-input-required" name="text-input-required" required placeholder="Placeholder text">
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="text-input-required">Label for required input</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <input class="c-input-text" type="text" id="text-input-required" name="text-input-required" required placeholder="Placeholder text">
+              </div>
+            </div>
 
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="text-input-disabled">Label for disabled</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <input class="c-input-text" type="text" id="text-input-disabled" name="text-input-disabled" disabled placeholder="Placeholder text">
+              </div>
+            </div>
 
-            <label for="text-input-disabled">Label for disabled</label>
-            <input type="text" id="text-input-disabled" name="text-input-disabled" disabled placeholder="Placeholder text">
           </fieldset>
 
-          <fieldset>
+          <fieldset class="c-form__fieldset  u-module">
             <legend>Legend</legend>
 
-            <label for="textarea">Label for textarea</label>
-            <textarea name="textarea" id="textarea" placeholder="Placeholder text"></textarea>
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="textarea">Label for textarea</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <textarea class="c-input-text  c-input-text--textarea"  name="textarea" id="textarea" placeholder="Placeholder text"></textarea>
+              </div>
+            </div>
 
-            <label for="select-input">Label for select</label>
-            <select name="select-input" id="select-input">
-              <option value="">Option 1</option>
-              <option value="">Option 2</option>
-              <option value="">Option 3</option>
-              <option value="">Option 4</option>
-            </select>
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="select-input">Label for select</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <div class="c-select">
+                  <select class="c-select__input" name="select-input" id="select-input" required>
+                    <option value="">-- choose option --</option>
+                    <option value="opt1">Option 1</option>
+                    <option value="opt2">Option 2</option>
+                    <option value="opt3">Option 3</option>
+                  </select>
+                  <svg width="15" height="15" class="c-select__icon"><use xlink:href="../build/dist.svg#dropdown"></use></svg>
+                </div>
+              </div>
+            </div>
 
-            <label>Label for radio buttons</label>
-            <div><input type="radio" name="radio-1" id="radio-1"> <label for="radio-1">Option 1</label></div>
-            <div><input type="radio" name="radio-1" id="radio-2"> <label for="radio-2">Option 2</label></div>
-            <div><input type="radio" name="radio-1" id="radio-3"> <label for="radio-3">Option 3</label></div>
-            <div><input type="radio" name="radio-1" id="radio-4"> <label for="radio-4">Option 4</label></div>
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label>Label for radio buttons</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <div class="c-choice">
+                  <div class="c-choice__wrap-list">
+                    <ul class="c-choice__list  o-list-clean">
+                      <li>
+                          <label class="c-control  c-control--radio" for="radio-1">
+                            <input class="c-control__input  u-visually-hidden" type="radio" value="radio-1" id="radio-1" name="radio-group-1">
+                            <span class="c-control__indicator" role="presentation"></span>
+                            <span class="c-control__label">
+                              Radio 1
+                            </span>
+                          </label>
+                      </li>
+                      <li>
+                        <label class="c-control  c-control--radio" for="radio-2">
+                          <input class="c-control__input  u-visually-hidden" type="radio" value="radio-2" id="radio-2" name="radio-group-1">
+                          <span class="c-control__indicator" role="presentation"></span>
+                          <span class="c-control__label">
+                            Radio 2
+                          </span>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label>Label for checkboxes</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <div class="c-choice">
+                  <div class="c-choice__wrap-list">
+                    <ul class="c-choice__list  o-list-clean">
+                      <li>
+                          <label class="c-control  c-control--checkbox" for="checkbox-1">
+                            <input class="c-control__input  u-visually-hidden" type="checkbox" value="checkbox-1" id="checkbox-1" name="checkbox-group-1">
+                            <span class="c-control__indicator" role="presentation">
+                              <svg width="14" height="10" class="c-control__icon"><use xlink:href="../build/dist.svg?v1#icon-check"></use></svg>
+                            </span>
+                            <span class="c-control__label">
+                              checkbox 1
+                            </span>
+                          </label>
+                      </li>
+                      <li>
+                        <label class="c-control  c-control--checkbox" for="checkbox-2">
+                          <input class="c-control__input  u-visually-hidden" type="checkbox" value="checkbox-2" id="checkbox-2" name="checkbox-group-1">
+                          <span class="c-control__indicator" role="presentation">
+                            <svg width="14" height="10" class="c-control__icon"><use xlink:href="../build/dist.svg?v1#icon-check"></use></svg>
+                          </span>
+                          <span class="c-control__label">
+                            checkbox 2
+                          </span>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </fieldset>
-          <button type="submit">Submit</button>
+          <button class="c-button" type="submit">Submit</button>
         </form>
       </div><!-- .test__run -->
 
@@ -261,9 +381,9 @@
 
   <div data-module="ui/test" data-context="@media (min-width:30em)">This should be replaced by a conditioner module</div>
 
-  <script src="../<%= buildFolder %>/js/manifest.js"></script>
-  <script src="../<%= buildFolder %>/js/vendor.js"></script>
-  <script src="../<%= buildFolder %>/js/app.js"></script>
+  <script src="../build/manifest.js"></script>
+  <script src="../build/vendor.js"></script>
+  <script src="../build/app.js"></script>
 </body>
 
 </html>

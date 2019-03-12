@@ -34,9 +34,9 @@ If you already have these packages installed, you can upgrade them:
 npm update -g yo generator-esites-fe
 ```
 
-**Note**: If you use this generator in a Kunstmaan project please check the [Kunstmaan CMS installation](#kunstmaan-cms-installation) guide.
-
 **Note**: Mac users need to run above commands with `sudo`.
+
+**Note**: If you use this generator in a Kunstmaan project please check the [Kunstmaan CMS installation](#kunstmaan-cms-installation) guide.
 
 ## Usage
 Please make sure your system meets the [prerequisites](#prerequisites).
