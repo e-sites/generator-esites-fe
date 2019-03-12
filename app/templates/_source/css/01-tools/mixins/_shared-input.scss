@@ -1,0 +1,41 @@
+/*  =========================================================================
+    tools.mixins.shared-input
+    Shared base styles for input, eg. buttons, text inputs, etc.
+    ========================================================================= */
+
+/*  Variables
+    ========================================================================= */
+
+$shared-input-border-width: 2px !default;
+$shared-input-padding-vertical: $supple-space-small !default;
+$shared-input-padding-horizontal: $supple-space !default;
+
+
+
+/*  Functions/Mixins
+    ========================================================================= */
+
+/**
+  * 1. By default inherit all default font styles.
+  * 2. Remove the border from the paddings for perfect control of the
+  *    dimensions.
+  */
+@mixin shared-input {
+  appearance: none;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  padding:
+    calc(#{supple-value-to-rem($shared-input-padding-vertical)} - #{$shared-input-border-width*2})
+    calc(#{supple-value-to-rem($shared-input-padding-horizontal)} - #{$shared-input-border-width*2}); /* [2] */
+  border: $shared-input-border-width solid transparent;
+  border-radius: 0;
+  transition-property: border color background-color box-shadow;
+  transition-duration: $base-animation-duration;
+  transition-timing-function: $base-animation-timing;
+  font: inherit; /* [1] */
+
+  &:focus {
+    @include generic-focus;
+  }
+}

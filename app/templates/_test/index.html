@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>frontend test file - yeoman-test</title>
+  <script>document.documentElement.className += ' js'; var app = {}, fs = {};</script>
+  <link rel="stylesheet" href="../build/style.css">
+
+  <style>
+    /* stylelint-disable */
+    /* just for testing purposes, do not copy this into your project */
+    body {
+      margin: 24px;
+    }
+
+    .module__title,
+    .test__describe,
+    .test__it {
+      padding: 12px 24px;
+      margin-bottom: 24px;
+      background-color: #eeeeee;
+    }
+
+    .test__describe,
+    .test__it {
+      border-left: 3px solid #666666;
+      padding-left: calc(24px - 3px);
+    }
+
+    .module__title::before,
+    .test__describe::before,
+    .test__it::before {
+      margin-right: 24px;
+      color: #999999;
+    }
+
+    .module {
+      counter-increment: module;
+    }
+
+    .module__title {
+      margin-top: 96px;
+      font-size: 2.369em;
+      counter-reset: test-describe;
+    }
+
+    .module__title::before {
+      content: counter(module);
+    }
+
+    .test {}
+
+    .test__describe {
+      margin-top: 48px;
+      font-size: 1.777em;
+      counter-reset: test-it;
+      counter-increment: test-describe;
+    }
+
+    .test__describe::before {
+      content: counter(module) '.' counter(test-describe);
+    }
+
+    .test__it {
+      margin-top: 12px;
+      font-size: 1.333em;
+      counter-increment: test-it;
+    }
+
+    .test__it::before {
+      content: counter(module) '.' counter(test-describe) '.' counter(test-it);
+    }
+
+    .test__run {}
+
+    .fixture-box {
+      padding: 12px;
+      background-color: rgba(255, 0, 0, 0.5);
+    }
+    /* stylelint-enable */
+  </style>
+</head>
+
+<body>
+  <h1>Test file</h1>
+
+  <div class="module">
+    <h2 class="module__title">Base tests</h2>
+    <div class="test">
+      <h3 class="test__describe">h1-h6</h3>
+      <div class="test__run">
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
+      </div><!-- .test__run -->
+
+      <h3 class="test__describe">hgroup, ul, ol, dl, blockquote, p, address, table, fieldset, figure, pre, hr</h3>
+      <div class="test__run">
+        <hgroup>hgroup</hgroup>
+        <ul>
+          <li>Unordered list: item 1</li>
+          <li>Unordered list: item 2</li>
+        </ul>
+        <ol>
+          <li>Ordered list: item 1</li>
+          <li>Ordered list: item 2</li>
+        </ol>
+        <dl>
+          <dt>Definition list: Term</dt>
+          <dd>Definition list: Description</dd>
+        </dl>
+        <blockquote>Blockquote content</blockquote>
+        <p>Paragraph</p>
+        <address>Address</address>
+        <table>
+          <thead>
+            <tr>
+              <th>Table head</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Table cell</td>
+            </tr>
+          </tbody>
+        </table>
+        <fieldset>Fieldset</fieldset>
+        <figure>Figure</figure>
+        <pre>Preformatted text</pre>
+        <hr>
+      </div><!-- .test__run -->
+
+      <h3 class="test__describe">button</h3>
+      <div class="test__run">
+        <p>
+          <button class="c-button" type="button">Button content</button>
+        </p>
+      </div><!-- .test__run -->
+
+      <h3 class="test__describe">[tabindex="-1"]:focus</h3>
+      <h4 class="test__it">has no focus outline (try clicking to trigger focus)</h4>
+      <div class="test__run">
+        <a href="#_" tabindex="-1">Link content</a>
+        <button class="c-button" type="button" tabindex="-1">Button content</button>
+      </div><!-- .test__run -->
+
+      <h3 class="test__describe">Forms</h3>
+      <!-- <h4 class="test__it">has no focus outline (try clicking to trigger focus)</h4> -->
+      <div class="test__run">
+        <form class="c-form" action="" data-validate>
+          <fieldset class="c-form__fieldset  u-module">
+            <legend>Legend</legend>
+
+            <div class="c-form__row  has-error  u-module">
+              <div class="c-form__wrap-label">
+                <label for="text-input">Label for input <small>Optional</small></label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <input class="c-input-text  is-invalid" type="text" id="text-input" name="text-input" placeholder="Placeholder text">
+              </div>
+              <div class="c-form__wrap-error">
+                <span class="c-form__error">Facilis autem vel enim iste temporibus</span>
+              </div>
+            </div>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="text-input-required">Label for required input</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <input class="c-input-text" type="text" id="text-input-required" name="text-input-required" required placeholder="Placeholder text">
+              </div>
+            </div>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="text-input-disabled">Label for disabled</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <input class="c-input-text" type="text" id="text-input-disabled" name="text-input-disabled" disabled placeholder="Placeholder text">
+              </div>
+            </div>
+
+          </fieldset>
+
+          <fieldset class="c-form__fieldset  u-module">
+            <legend>Legend</legend>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="textarea">Label for textarea</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <textarea class="c-input-text  c-input-text--textarea"  name="textarea" id="textarea" placeholder="Placeholder text"></textarea>
+              </div>
+            </div>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label for="select-input">Label for select</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <div class="c-select">
+                  <select class="c-select__input" name="select-input" id="select-input" required>
+                    <option value="">-- choose option --</option>
+                    <option value="opt1">Option 1</option>
+                    <option value="opt2">Option 2</option>
+                    <option value="opt3">Option 3</option>
+                  </select>
+                  <svg width="15" height="15" class="c-select__icon"><use xlink:href="../build/dist.svg#dropdown"></use></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label>Label for radio buttons</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <div class="c-choice">
+                  <div class="c-choice__wrap-list">
+                    <ul class="c-choice__list  o-list-clean">
+                      <li>
+                          <label class="c-control  c-control--radio" for="radio-1">
+                            <input class="c-control__input  u-visually-hidden" type="radio" value="radio-1" id="radio-1" name="radio-group-1">
+                            <span class="c-control__indicator" role="presentation"></span>
+                            <span class="c-control__label">
+                              Radio 1
+                            </span>
+                          </label>
+                      </li>
+                      <li>
+                        <label class="c-control  c-control--radio" for="radio-2">
+                          <input class="c-control__input  u-visually-hidden" type="radio" value="radio-2" id="radio-2" name="radio-group-1">
+                          <span class="c-control__indicator" role="presentation"></span>
+                          <span class="c-control__label">
+                            Radio 2
+                          </span>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="c-form__row  u-module">
+              <div class="c-form__wrap-label">
+                <label>Label for checkboxes</label>
+              </div>
+              <div class="c-form__wrap-hint">
+                <span>Facilis autem vel enim iste temporibus odio omnis</span>
+              </div>
+              <div class="c-form__wrap-input">
+                <div class="c-choice">
+                  <div class="c-choice__wrap-list">
+                    <ul class="c-choice__list  o-list-clean">
+                      <li>
+                          <label class="c-control  c-control--checkbox" for="checkbox-1">
+                            <input class="c-control__input  u-visually-hidden" type="checkbox" value="checkbox-1" id="checkbox-1" name="checkbox-group-1">
+                            <span class="c-control__indicator" role="presentation">
+                              <svg width="14" height="10" class="c-control__icon"><use xlink:href="../build/dist.svg?v1#icon-check"></use></svg>
+                            </span>
+                            <span class="c-control__label">
+                              checkbox 1
+                            </span>
+                          </label>
+                      </li>
+                      <li>
+                        <label class="c-control  c-control--checkbox" for="checkbox-2">
+                          <input class="c-control__input  u-visually-hidden" type="checkbox" value="checkbox-2" id="checkbox-2" name="checkbox-group-1">
+                          <span class="c-control__indicator" role="presentation">
+                            <svg width="14" height="10" class="c-control__icon"><use xlink:href="../build/dist.svg?v1#icon-check"></use></svg>
+                          </span>
+                          <span class="c-control__label">
+                            checkbox 2
+                          </span>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+          <button class="c-button" type="submit">Submit</button>
+        </form>
+      </div><!-- .test__run -->
+
+    </div><!-- .test -->
+  </div><!-- .module -->
+
+  <div class="module">
+    <h2 class="module__title">Objects tests</h2>
+    <div class="test">
+      <h3 class="test__describe">wrappers</h3>
+      <div class="test__run">
+        <div class="wrapper-inner">
+          <div class="fixture-box">Wrapper inner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module">
+    <h2 class="module__title">Components tests</h2>
+    <div class="test">
+      <h3 class="test__describe">editor content</h3>
+      <div class="test__run">
+        <div class="editor-content">
+          <h1>Heading 1</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi repellat quas cum dolorum. Qui odio veniam impedit blanditiis. Ullam molestiae explicabo aliquid adipisci atque quae dolor quia eaque enim ut.</p>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>
+              Item 3
+              <ul>
+                <li>Sub item 1</li>
+                <li>Sub item 2</li>
+                <li>Sub item 3</li>
+              </ul>
+            </li>
+            <li>Item 4</li>
+          </ul>
+
+          <img class="align-left" src="//placehold.it/200x120" alt="">
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sequi expedita consequuntur earum labore facere at sunt sed reiciendis voluptatibus necessitatibus id obcaecati ipsum beatae delectus, eum accusantium? Vel, obcaecati? Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sequi expedita consequuntur earum labore facere at sunt sed reiciendis voluptatibus necessitatibus id obcaecati ipsum beatae delectus, eum accusantium? Vel, obcaecati?</p>
+
+          <img class="align-right" src="//placehold.it/200x120" alt="">
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sequi expedita consequuntur earum labore facere at sunt sed reiciendis voluptatibus necessitatibus id obcaecati ipsum beatae delectus, eum accusantium? Vel, obcaecati?</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Table head</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Table cell</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis commodi nobis ducimus, in molestias sit temporibus deleniti distinctio sint odit architecto quo illum natus culpa iure repellendus voluptate ipsum fugit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="http://google.nl" target="_blank">External link</a>
+
+  <div data-module="ui/test" data-context="@media (min-width:30em)">This should be replaced by a conditioner module</div>
+
+  <script src="../build/manifest.js"></script>
+  <script src="../build/vendor.js"></script>
+  <script src="../build/app.js"></script>
+</body>
+
+</html>

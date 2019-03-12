@@ -1,0 +1,8 @@
+# Ignore build assets
+<%= buildPath.replace('./', '') %>/*/*
+
+# misc
+_tmp
+.idea/
+node_modules/
+.vscode

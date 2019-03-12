@@ -1,0 +1,37 @@
+/*  =========================================================================
+    components.button
+    Buttons communicate the action that will occur when the user touches them.
+    ========================================================================= */
+
+/*  Variables
+    ========================================================================= */
+
+
+
+/*  Functions/Mixins
+    ========================================================================= */
+
+
+
+/*  Module
+    ========================================================================= */
+
+/**
+ * 1. Get the base styles from the shared input mixin
+ * 1. remove text-decoration from other possible interactive elements
+ * 2. Opinionated pointer cursor
+ */
+.c-button {
+  @include shared-input; /* [1] */
+  margin: 0;
+  text-decoration: none; /* [2] */
+  cursor: pointer; /* [3] */
+  background-color: $color-brand-primary;
+  color: $color-white;
+
+  #{$all-hovers} {
+    color: $color-brand-primary;
+    background-color: $color-white;
+    border-color: currentColor;
+  }
+}

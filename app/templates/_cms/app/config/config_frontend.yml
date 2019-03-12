@@ -1,0 +1,68 @@
+framework:
+    assets:
+        json_manifest_path: '%kernel.root_dir%/../web/frontend/manifest.json'
+
+twig:
+    paths:
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views": EsitesWebsiteBundle
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Macros": macros
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Form": Forms
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms": Atoms
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules": Molecules
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms": Organisms
+
+liip_imagine:
+    filter_sets:
+        # generic resize (used in macro)
+        resize_jpeg:
+            quality: 80
+            filters:
+                strip: ~
+                scale:
+                    dim: [1000, 1000]
+
+        resize_png:
+            quality: 100
+            format: png
+            filters:
+                strip: ~
+                scale:
+                    dim: [1000, 1000]
+
+        resize_gif:
+            quality: 100
+            format: gif
+            filters:
+                strip: ~
+                scale:
+                    dim: [1000, 1000]
+
+        # generic crop (used in macro)
+        crop_jpeg:
+            quality: 80
+            filters:
+                strip: ~
+                thumbnail:
+                    size: [1000, 1000]
+                    allow_upscale: true
+                    mode: outbound
+
+        crop_png:
+            quality: 100
+            format: png
+            filters:
+                strip: ~
+                thumbnail:
+                    size: [1000, 1000]
+                    allow_upscale: true
+                    mode: outbound
+
+        crop_gif:
+            quality: 100
+            format: gif
+            filters:
+                strip: ~
+                thumbnail:
+                    size: [1000, 1000]
+                    allow_upscale: true
+                    mode: outbound

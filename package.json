@@ -1,0 +1,40 @@
+{
+  "name": "generator-esites-fe",
+  "version": "1.0.0",
+  "description": "Yeoman generator for E-sites frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-sites/generator-esites-fe.git"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman",
+    "yeoman-generator",
+    "e-sites",
+    "frontend"
+  ],
+  "author": "Bram Smulders <bram@e-sites.nl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/e-sites/generator-esites-fe/issues"
+  },
+  "homepage": "https://github.com/e-sites/generator-esites-fe#readme",
+  "dependencies": {
+    "@e-sites/eslint-config": "^2.0.0",
+    "babel-eslint": "^8.2.3",
+    "chalk": "^2.4.2",
+    "compare-versions": "^3.4.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "slugify": "^1.3.4",
+    "yeoman-generator": "^3.2.0",
+    "yosay": "^2.0.2"
+  }
+}
