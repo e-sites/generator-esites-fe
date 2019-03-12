@@ -1,12 +1,11 @@
 /**
  * Handles form validation
  */
-import validate from 'validate';
+import Bouncer from 'formbouncerjs';
 
 const formValidation = {
   init: () => {
-    validate.init({
-      selector: '[data-validate]',
+    Bouncer('[data-validate]', {
       fieldClass: 'is-invalid',
       errorClass: 'c-form__error',
     });
