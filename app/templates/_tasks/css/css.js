@@ -30,7 +30,12 @@ const compilecss = () =>
     .src([`${paths.source + folder}/*.scss`])
     .pipe(handleError('sass', 'SASS compiling failed'))
     .pipe(gulpif(debug, sourcemaps.init()))
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({
+      precision: 8,
+      includePaths: [
+        './node_modules',
+      ],
+    }).on('error', sass.logError))
     .pipe(cleanCSS({
       level: debug ? 0 : 2,
     }))
