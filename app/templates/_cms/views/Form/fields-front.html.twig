@@ -27,12 +27,6 @@
     </div>
     <div class="c-form__wrap-input">
       {{ form_widget(form) }}
-      {% if form.vars.required %}
-        <span class="c-form__icon-container">
-          {{ macros.svg('icon-cross', 12, 12, 'c-form__icon c-form__icon--cross') }}
-          {{ macros.svg('icon-check', 14, 10, 'c-form__icon c-form__icon--check') }}
-        </span>
-      {% endif %}
     </div>
     <div class="c-form__wrap-error">
       {{ form_errors(form) }}
@@ -50,14 +44,11 @@
       {% set label_attr = label_attr|merge({'for': id}) %}
     {% endif %}
     {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ '')|trim}) %}
-    {% if required %}
-      {% set label_attr = label_attr|merge({'class': label_attr.class ~ '  is-required'}) %}
-    {% endif %}
     {% if label is empty %}
       {% set label = name|humanize %}
     {% endif %}
       <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-        {{ label|trans({}, translation_domain) }}{% if required %} *{% endif %}
+        {{ label|trans({}, translation_domain) }}{% if not required %} <small>{{ 'form.label.optional'|trans }}</small>{% endif %}
       </label>
   {% endif %}
 {% endspaceless %}
@@ -67,7 +58,7 @@
 {# Form widget: Hidden #}
 {% block hidden_widget %}
 {% spaceless %}
-  <div {{ block('widget_container_attributes') }} class="u-sr-only">
+  <div {{ block('widget_container_attributes') }} class="u-visually-hidden">
     {% set type = type|default('hidden') %}
     {{ block('form_widget_simple') }}
   </div>
@@ -79,7 +70,7 @@
 {% block form_widget_simple %}
 {% spaceless %}
   {% set type = type|default('text') %}
-  {% set class = (attr.class|default('') ~ '') %}
+  {% set class = (attr.class|default('') ~ ' c-input-text') %}
   {% set attr = attr|merge({'class': class|trim}) %}
   <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}>
 {% endspaceless %}
@@ -89,7 +80,7 @@
 {# Form widget: Textarea #}
 {% block textarea_widget %}
 {% spaceless %}
-  {% set class = (attr.class|default('') ~ '') %}
+  {% set class = (attr.class|default('') ~ ' c-input-text  c-input-text--textarea') %}
   {% set attr = attr|merge({'class': class|trim}) %}
   <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
 {% endspaceless %}
@@ -117,7 +108,7 @@
       {% set options = choices %}
       {{ block('choice_widget_options') }}
     </select>
-    {{ macros.svg('chevron-down', 15, 15, 'c-select__icon') }}
+    {{ macros.svg('dropdown', 15, 15, 'c-select__icon') }}
   </div>
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
@@ -151,7 +142,7 @@
   {% if label is empty %}
     {% set label = name|humanize %}
   {% endif %}
-  {% set class = (attr.class|default('') ~ ' c-control__input  u-sr-only') %}
+  {% set class = (attr.class|default('') ~ ' c-control__input  u-visually-hidden') %}
   {% set attr = attr|merge({'class': class|trim}) %}
   <label class="c-control  c-control--radio" for="{{ id }}"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} data-label="{{ label|trans({}, translation_domain)|raw }}">
@@ -174,7 +165,7 @@
   {% if label is empty %}
     {% set label = name|humanize %}
   {% endif %}
-  {% set class = (attr.class|default('') ~ ' c-control__input  u-sr-only') %}
+  {% set class = (attr.class|default('') ~ ' c-control__input  u-visually-hidden') %}
   {% set attr = attr|merge({'class': class|trim}) %}
   <label class="c-control  c-control--checkbox" for="{{ id }}"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} data-label="{{ label|trans({}, translation_domain)|raw }}">

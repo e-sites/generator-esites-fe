@@ -1,0 +1,109 @@
+/*  =========================================================================
+    settings.vars
+    Global variables, config switches.
+    Used in conjunction with supple css.
+    ========================================================================= */
+
+/*  =========================================================================
+    Overrides
+    Any variables you find set in supple that you do not wish to keep, simply
+    redefine here. This means that if supple sets your`$supple-font-size`
+    at 16px and you wish it to be 18px, simplyredeclare that variable
+    in this section.
+    ========================================================================= */
+
+/*  Typography
+    ========================================================================= */
+
+$supple-font-size: 16px;
+$supple-line-height: 24px;
+
+
+
+
+
+/*  =========================================================================
+    Custom
+    Place any of your own variables that sit on top of supple here.
+    Please use the `!default` flag because variables defined here can be
+    overwritten by another theme
+    ========================================================================= */
+
+/*  Typography
+    Base typographic settings
+    ========================================================================= */
+
+$font-family-base: Arial, sans-serif !default;
+$font-family-heading: Verdana, $font-family-base !default;
+
+
+
+/*  Colors
+    ========================================================================= */
+
+/**
+ * Brand colors
+ */
+$color-brand-primary: #06a77d !default;
+
+/**
+ * Status colors
+ */
+$color-error: #fc3030 !default;
+$color-success: #74bd00 !default;
+$color-warning: #f8d407 !default;
+$color-focus-ring: #51cbee !default;
+
+/**
+ * Grayscale
+ */
+$color-white: #ffffff !default;
+$color-gray-100: #f5f5f6 !default;
+$color-gray-500: #cccccc !default;
+$color-gray-900: #2c2f33 !default;
+$color-black: #000000 !default;
+
+
+
+/*  Animations
+    Global to keep animations consistent
+    ========================================================================= */
+
+$base-animation-duration: 150ms !default;
+$base-animation-timing: cubic-bezier(0.55, 0, 0.1, 1) !default; // Google swift bezier
+
+
+
+/*  Responsive
+    Used in conjunction with Sass MQ: https://sass-mq.github.io/sass-mq/
+    ========================================================================= */
+
+$mq-base-font-size: $supple-font-size;
+
+/**
+ * Name your breakpoints in a way that creates a ubiquitous language
+ * across team members. It will improve communication between
+ * stakeholders, designers, developers, and testers.
+ */
+$mq-breakpoints: (
+  sm: 480px,
+  md: 640px,
+  lg: 960px,
+  xl: 1280px,
+);
+
+/**
+ * If you want to display the currently active breakpoint in the top
+ * right corner of your site during development, add the breakpoints
+ * to this list, ordered by width, e.g. (mobile, tablet, desktop).
+ */
+$mq-show-breakpoints: ();
+
+
+
+/*  Selectors
+    Variables for common selector types like: :hover, :active, etc.
+    ========================================================================= */
+
+$all-hovers: '&:hover, &:focus' !default;
+

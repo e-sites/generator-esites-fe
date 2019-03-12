@@ -1,45 +1,4 @@
-@charset "UTF-8";
-
-$root-font-size: 10px;
-
-// Settings, mixins and font-face
-@import '00-settings/_settings';
-@import '01-tools/_tools';
-@import '02-generic/_generic';
-
-
-
-/* Use these styling only in the pagepart previews
-   ========================================================================== */
-
-.page-template__region .admin-region,
-.pp__view .pp__view__block:first-child {
-  // Base scaffolding
-  @import '03-base/forms';
-  @import '03-base/lists';
-  @import '03-base/tables';
-  @import '03-base/typography';
-  @import '03-base/media';
-  @import '04-objects/_objects';
-
-  /**
-   * Add admin block styling here.
-   */
-
-  /**
-   * Import trumps after block
-   */
-  @import '06-trumps/_trumps';
-
-  /**
-   * Kunstmaan specific overrides below
-   */
-
-  // Pagepart max width
-  .pagepart {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: $max-width-base * (16px / $root-font-size);
-  }
-}
+/*  =========================================================================
+    Admin styles
+    used specifically for styling in admin pages
+    ========================================================================= */

@@ -1,0 +1,32 @@
+/*  =========================================================================
+    components.choice
+    List containing checkboxes or radios
+    ========================================================================= */
+
+/*  Variables
+    ========================================================================= */
+
+
+
+/*  Functions/Mixins
+    ========================================================================= */
+
+
+
+/*  Module
+    ========================================================================= */
+
+.c-choice {
+  // empty for reference
+}
+
+
+/**
+ * Element: list
+ * Used in conjunction with `o-list-clean`
+ */
+.c-choice__list {
+  > li:not(:last-child) {
+    @include supple-rem(margin-bottom, $supple-space-small);
+  }
+}
