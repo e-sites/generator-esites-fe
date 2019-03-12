@@ -8,8 +8,9 @@ Please see our [Gulp tasks](https://github.com/e-sites/generator-esites-fe/tree/
 - [ITCSS](https://www.creativebloq.com/web-design/manage-large-css-projects-itcss-101517528) CSS architecture
 - Compile Sass with [libsass](http://libsass.org)
 - Enable CSS plugins with [PostCSS](http://postcss.org/)
+- CSS baseline by [Supple CSS](https://github.com/supple-css/supple)
 - CSS Autoprefixing with [Autoprefixer](https://github.com/postcss/autoprefixer)
-- Javascript management with [webpack-encore](https://github.com/symfony/webpack-encore)
+- Javascript management with [webpack](https://webpack.js.org/)
 - ES2015+ features with [Babel](https://babeljs.io)
 - [Conditioner.js](https://github.com/rikschennink/conditioner) - Frizz free, context-aware, JavaScript modules
 - Asset versioning with [gulp-rev](https://github.com/sindresorhus/gulp-rev)
@@ -73,7 +74,7 @@ Files & folders which you need to **remove**:
 
 **Note**: It is recommended that you remove these files but if you don’t, dont worry! The generator will prompt you when there are conflicts on the files.
 
-Files you need to alter:
+Files you need to **change**:
 
 - `.gitignore`: change `web/frontend/*/*` to `web/frontend/**/*`
 - `app/config/config.yml`: add `- { resource: config_frontend.yml }` parameter to `imports`
