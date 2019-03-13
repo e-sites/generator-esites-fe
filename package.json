@@ -4,7 +4,9 @@
   "description": "Yeoman generator for E-sites frontend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -26,15 +28,24 @@
   },
   "homepage": "https://github.com/e-sites/generator-esites-fe#readme",
   "dependencies": {
-    "@e-sites/eslint-config": "^2.0.0",
-    "babel-eslint": "^8.2.3",
     "chalk": "^2.4.2",
     "compare-versions": "^3.4.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.16.0",
     "slugify": "^1.3.4",
     "yeoman-generator": "^3.2.0",
     "yosay": "^2.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-wesbos": "0.0.19",
+    "eslint-plugin-html": "^5.0.3",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.5.0",
+    "prettier": "^1.16.4"
   }
 }
