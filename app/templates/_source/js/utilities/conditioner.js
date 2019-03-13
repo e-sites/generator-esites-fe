@@ -4,6 +4,8 @@
  */
 import * as conditioner from 'conditioner-core';
 
+/* prettier-ignore */
+
 /**
  * Configure conditioner to work with dynamic imports & webpack
  */

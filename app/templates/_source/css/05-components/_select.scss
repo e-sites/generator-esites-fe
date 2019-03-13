@@ -30,7 +30,7 @@
  * 2. Accommodate space for the icon
  * 3. Set explicit height because firefox does not respect the line-height
  */
- .c-select__input {
+.c-select__input {
   @include shared-input; /* [1] */
   @include supple-rem(height, $supple-line-height + $shared-input-padding-vertical*2); /* [3] */
   padding-right: $supple-space-large; /* [2] */

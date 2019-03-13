@@ -74,7 +74,7 @@ $c-control-indicator-active-background-color: $color-brand-primary !default;
   .c-control__indicator {
     border-radius: 50%;
 
-    &::after {
+    &:after {
       position: absolute;
       top: 50%;
       left: 50%;

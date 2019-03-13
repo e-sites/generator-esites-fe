@@ -1,3 +1,6 @@
 {
-  "extends": "@e-sites/stylelint-config-esites"
+  "extends": "stylelint-config-supple",
+  "plugins": [
+    "stylelint-scss"
+  ]
 }
