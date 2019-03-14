@@ -237,7 +237,6 @@ Are you sure you want to upgrade?`,
         this._writingGitignore();
       }
 
-      this._writingGitkeeps();
       this._writingEditorConfig();
       this._writingBrowserslist();
       this._writingPackage();
@@ -259,6 +258,8 @@ Are you sure you want to upgrade?`,
       if (this.useTest) {
         this._writingTest();
       }
+
+      this._writingGitkeeps();
     }
   }
 
@@ -266,6 +267,22 @@ Are you sure you want to upgrade?`,
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
       this.destinationPath(`${this.buildPath}/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/01-tools/functions/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/02-generic/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/04-objects/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/06-utilities/.gitkeep`)
     );
   }
 
