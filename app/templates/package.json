@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production gulp",
     "lint": "eslint --ext js,jsx <%= sourcePath %> && stylelint '<%= sourcePath %>/**/*.scss'",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint --ext js,jsx <%= sourcePath %> --fix",
     "serve": "gulp serve",
     "start": "gulp watch",
     "test": "npm run lint"
