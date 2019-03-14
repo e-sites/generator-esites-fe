@@ -1,9 +1,6 @@
 module.exports = {
   js: {
-    entries: [
-      'app.js',
-      'admin.js',
-    ],
+    entries: ['app.js', 'admin.js'],
     vendor: [
       'core-js/web/dom-collections',
       'core-js/es6/object',
@@ -37,8 +34,4 @@ module.exports = {
     openPath: '/<%= openPath %>',
   },
   revisionFiles: true,
-  mjml: {
-    enabled: false,
-    extension: '.twig',
-  },
 };
