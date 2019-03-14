@@ -7,7 +7,11 @@ const generatorConfig = require('../package.json');
 
 module.exports = class extends Generator {
   hello() {
-    this.log(yosay(`Welcome to the ${chalk.rgb(244, 0, 77)('E-sites')} frontend generator!`));
+    this.log(
+      yosay(
+        `Welcome to the ${chalk.rgb(244, 0, 77)('E-sites')} frontend generator!`
+      )
+    );
 
     // We'll need this later, you'll never know
     this.run = true;
@@ -20,7 +24,13 @@ module.exports = class extends Generator {
     const projectConfig = this.config.getAll();
 
     if (Object.keys(projectConfig).length && !('version' in projectConfig)) {
-      this.log(yosay(`It seems that a ${chalk.rgb(244, 0, 77)('.yo-rc.json')} is present in the project. Some options are prefilled. Please check if they are correct.`));
+      this.log(
+        yosay(
+          `It seems that a ${chalk.rgb(244, 0, 77)(
+            '.yo-rc.json'
+          )} is present in the project. Some options are prefilled. Please check if they are correct.`
+        )
+      );
     }
 
     // Cache default prompts
@@ -30,24 +40,20 @@ module.exports = class extends Generator {
         name: 'name',
         message: 'Your project name',
         default: this.appname,
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
+        when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'confirm',
         name: 'cms',
         message: 'Are you scaffolding for a kunstmaan project?',
         default: projectConfig.cms,
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
+        when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
-        default: (answers) => {
+        default: answers => {
           let string = './source';
 
           if (projectConfig.source) {
@@ -58,15 +64,13 @@ module.exports = class extends Generator {
 
           return string;
         },
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
+        when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'input',
         name: 'webroot',
         message: 'Your web root folder?',
-        default: (answers) => {
+        default: answers => {
           let string = './';
 
           if (projectConfig.webroot) {
@@ -77,15 +81,13 @@ module.exports = class extends Generator {
 
           return string;
         },
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
+        when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'input',
         name: 'build',
         message: 'Your build folder? (relative to web root)',
-        default: (answers) => {
+        default: answers => {
           let string = 'build';
 
           if (projectConfig.build) {
@@ -96,27 +98,25 @@ module.exports = class extends Generator {
 
           return string;
         },
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
+        when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'confirm',
         name: 'useTest',
         message: 'Do you want to copy the HTML test file?',
         default: projectConfig.useTest,
-        when: (answers) => {
-          return ('upgrade' in answers) ? answers.upgrade : true;
-        },
+        when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
     ];
-
 
     /**
      * Check if there are settings logged in the cached config
      */
     if (Object.keys(projectConfig).length && 'version' in projectConfig) {
-      const compare = compareVersions(generatorConfig.version, projectConfig.version);
+      const compare = compareVersions(
+        generatorConfig.version,
+        projectConfig.version
+      );
       // check if current version is bigger than version of config
       if (compare >= 0) {
         // Prepend update prompt to promts
@@ -136,19 +136,16 @@ Are you sure you want to upgrade?`,
             message: 'What do you want to upgrade?',
             choices: ['tasks', 'assets', 'cmsstuff'],
             default: ['tasks'],
-            when: (answers) => {
-              return ('upgrade' in answers) ? answers.upgrade : true;
-            },
+            when: answers => ('upgrade' in answers ? answers.upgrade : true),
           }
         );
       }
     }
 
-
     /**
      * Actual prompt the user
      */
-    return this.prompt(prompts).then((answers) => {
+    return this.prompt(prompts).then(answers => {
       if ('upgrade' in answers) {
         this.run = answers.upgrade;
         this.upgrade = answers.upgrade;
@@ -161,7 +158,11 @@ Are you sure you want to upgrade?`,
       }
 
       if (this.run) {
-        console.log(chalk.rgb(73, 166, 255)('The answers are correct! You go through for the fridge…'));
+        console.log(
+          chalk.rgb(73, 166, 255)(
+            'The answers are correct! You go through for the fridge…'
+          )
+        );
 
         /**
          * A little defensive coding against folders not properly set by the user
@@ -185,12 +186,11 @@ Are you sure you want to upgrade?`,
           webRootPath = `${webRootPath}/`;
         }
 
-
         /**
          * Store stuff for later use
          */
         this.projectName = slugify(answers.name, {
-          remove: /[$*_+~.()'"!\:@]/g,
+          remove: /[$*_+~.()'"!:@]/g,
           lower: true,
         });
         this.sourcePath = answers.source;
@@ -200,7 +200,6 @@ Are you sure you want to upgrade?`,
         this.useTest = answers.useTest;
         this.useCms = answers.cms;
 
-
         /**
          * Store answers in a `.yo-rc.json` for later use
          */
@@ -209,7 +208,6 @@ Are you sure you want to upgrade?`,
         this.config.set('name', this.projectName);
 
         this.config.save();
-
 
         /**
          * Configure template settings for use in templated files
@@ -239,7 +237,6 @@ Are you sure you want to upgrade?`,
         this._writingGitignore();
       }
 
-      this._writingGitkeeps();
       this._writingEditorConfig();
       this._writingBrowserslist();
       this._writingPackage();
@@ -261,6 +258,8 @@ Are you sure you want to upgrade?`,
       if (this.useTest) {
         this._writingTest();
       }
+
+      this._writingGitkeeps();
     }
   }
 
@@ -268,6 +267,22 @@ Are you sure you want to upgrade?`,
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
       this.destinationPath(`${this.buildPath}/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/01-tools/functions/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/02-generic/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/04-objects/.gitkeep`)
+    );
+    this.fs.copyTpl(
+      this.templatePath('.gitkeep'),
+      this.destinationPath(`${this.sourcePath}/css/06-utilities/.gitkeep`)
     );
   }
 
@@ -343,10 +358,7 @@ Are you sure you want to upgrade?`,
       this.destinationPath('gulpfile.js')
     );
 
-    this.fs.copy(
-      this.templatePath('_tasks'),
-      this.destinationPath('tasks')
-    );
+    this.fs.copy(this.templatePath('_tasks'), this.destinationPath('tasks'));
 
     this.fs.copyTpl(
       this.templatePath('gulp-config.js'),
@@ -389,24 +401,27 @@ Are you sure you want to upgrade?`,
   }
 
   _writingCmsApp() {
-    this.fs.copy(
-      this.templatePath('_cms/app'),
-      this.destinationPath('./app')
-    );
+    this.fs.copy(this.templatePath('_cms/app'), this.destinationPath('./app'));
   }
 
   _writingCmsGitkeeps() {
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
-      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms/.gitkeep')
+      this.destinationPath(
+        './src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms/.gitkeep'
+      )
     );
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
-      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules/.gitkeep')
+      this.destinationPath(
+        './src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules/.gitkeep'
+      )
     );
     this.fs.copyTpl(
       this.templatePath('.gitkeep'),
-      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms/.gitkeep')
+      this.destinationPath(
+        './src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms/.gitkeep'
+      )
     );
   }
 
@@ -423,9 +438,17 @@ Are you sure you want to upgrade?`,
 
   end() {
     if (this.run) {
-      this.log(yosay(`${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')}  or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+      this.log(
+        yosay(
+          `${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.` // prettier-ignore
+        )
+      );
     } else {
-      this.log(yosay(`${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.`));
+      this.log(
+        yosay(
+          `${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.` // prettier-ignore
+        )
+      );
     }
   }
 };

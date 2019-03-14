@@ -17,7 +17,6 @@ import 'core-js/stage/4';
 import 'element-closest';
 import 'svgxuse';
 
-
 /**
  * Import our own handy dandy utilities
  */

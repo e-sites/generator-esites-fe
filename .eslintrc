@@ -1,5 +1,5 @@
 {
-  "extends": "@e-sites/eslint-config",
+  "extends": "wesbos",
   "rules": {
     "no-underscore-dangle": "off"
   }

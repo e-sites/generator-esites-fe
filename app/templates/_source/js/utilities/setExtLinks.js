@@ -11,9 +11,9 @@ const setExtLinks = {
     setExtLinks.initAll(links);
   },
 
-  initAll: (links) => {
+  initAll: links => {
     if (links) {
-      [...links].forEach((link) => {
+      [...links].forEach(link => {
         link.setAttribute('rel', 'noopener');
       });
     }
@@ -23,4 +23,3 @@ const setExtLinks = {
 setExtLinks.init();
 
 export default setExtLinks;
-

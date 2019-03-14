@@ -1,4 +1,5 @@
 {
-  "parser": "babel-eslint",
-  "extends": "@e-sites/eslint-config"
+  "extends": [
+    "wesbos"
+  ]
 }

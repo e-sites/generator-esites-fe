@@ -1,4 +1,4 @@
-export default (element) => {
+export default element => {
   console.log('Component mounted on', element);
 
   // logic here
@@ -11,7 +11,6 @@ export default (element) => {
     // dispatch events to notify other components
     element.dispatchEvent(new CustomEvent('bar'));
   };
-
 
   // expose destroy method
   return () => {
