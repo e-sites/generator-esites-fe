@@ -19,6 +19,7 @@ module.exports = {
     dist: '<%= buildPath %>',
     webroot: '<%= webRootPath %>',
     public: '<%= buildFolder %>',
+    temp: './_tmp',
     folders: {
       fonts: '/fonts',
       css: '/css',

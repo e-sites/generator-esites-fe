@@ -16,7 +16,7 @@ const { paths } = require(`${process.cwd()}/gulp-config.js`);
 const folder = paths.folders.js;
 
 const clean = (done) => {
-  del([`${paths.dist}/**/*.{js,map}`]);
+  del([`${paths.temp}/**/*.{js,map}`]);
   done();
 };
 
@@ -25,7 +25,7 @@ const js = (allDone) => {
 
   return stream
     .on('error', notify.onError(error => error))
-    .pipe(gulp.dest(paths.dist))
+    .pipe(gulp.dest(paths.temp))
     .on('close', () => {
       notifier.notify({
         title: 'js',
