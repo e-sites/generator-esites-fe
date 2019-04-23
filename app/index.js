@@ -169,11 +169,18 @@ Are you sure you want to upgrade?`,
          */
         let webRootPath = answers.webroot;
         let buildfolder = answers.build;
+        let sourcePath = answers.source;
 
         if (buildfolder.startsWith('./')) {
           buildfolder = buildfolder.replace('./', '');
         } else if (buildfolder.startsWith('/')) {
           buildfolder = buildfolder.substring(1);
+        }
+
+        if (sourcePath.startsWith('/')) {
+          sourcePath = `.${sourcePath}`;
+        } else if (!sourcePath.startsWith('./')) {
+          sourcePath = `./${sourcePath}`;
         }
 
         if (webRootPath.startsWith('/')) {
@@ -193,7 +200,7 @@ Are you sure you want to upgrade?`,
           remove: /[$*_+~.()'"!:@]/g,
           lower: true,
         });
-        this.sourcePath = answers.source;
+        this.sourcePath = sourcePath;
         this.webRootPath = webRootPath;
         this.buildFolder = buildfolder;
         this.buildPath = `${this.webRootPath}${this.buildFolder}`;

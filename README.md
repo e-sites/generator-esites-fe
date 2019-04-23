@@ -76,7 +76,7 @@ Files & folders which you need to **remove**:
 
 Files you need to **change**:
 
-- `.gitignore`: change `web/frontend/*/*` to `web/frontend/**/*`
+- `.gitignore`: change `web/frontend/*/*` to `web/frontend/**/*` & add `/_tmp`
 - `app/config/config.yml`: add `- { resource: config_frontend.yml }` parameter to `imports`
 - `app/config/config.yml`: remove the `framework.assets` parameter
 

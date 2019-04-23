@@ -6,7 +6,7 @@ const gulp = require('gulp');
 const rev = require('gulp-rev');
 const tasker = require('gulp-tasker');
 const gulpif = require('gulp-if');
-const { handleError, handleSuccess } = require('../base/handlers');
+const { handleError, handleSuccess } = require('../00-base/handlers');
 const del = require('del');
 const svgstore = require('gulp-svgstore');
 const imagemin = require('gulp-imagemin');
@@ -17,7 +17,7 @@ const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 const folder = paths.folders.svg;
 
 const cleansvg = (done) => {
-  del([`${paths.dist}/**/*.svg`]);
+  del([`${paths.temp}/**/*.svg`]);
   done();
 };
 
@@ -52,35 +52,7 @@ const svgconcat = () =>
     ]))
     .pipe(handleError('svgconcat', 'SVG concatenation failed'))
     .pipe(rename('dist.svg'))
-    .pipe(gulpif(revisionFiles, rev()))
-    .pipe(gulp.dest(paths.dist))
-    .pipe(gulpif(revisionFiles, rename({
-      dirname: `${paths.public}`,
-    })))
-    .pipe(gulpif(
-      revisionFiles,
-      rev.manifest(`${paths.dist}/manifest.json`, {
-        base: paths.public,
-        merge: true,
-        transformer: {
-          stringify: (map) => {
-            const cleanObject = {};
-            const keys = Object.keys(map);
-
-            keys.forEach((key) => {
-              cleanObject[`${key.replace(`${paths.public}/`, '')}`] = `${map[key]}`;
-            });
-
-            return JSON.stringify(cleanObject, null, 2);
-          },
-          parse: map => JSON.parse(map),
-        },
-      })
-    ))
-    .pipe(gulpif(
-      revisionFiles,
-      gulp.dest(paths.public)
-    ))
+    .pipe(gulp.dest(paths.temp))
     .pipe(handleSuccess('svgconcat', 'SVG concatenation succeeded'));
 
 const svgTaskDirty = gulp.series(cleansvg, copySVGS, svgconcat);
