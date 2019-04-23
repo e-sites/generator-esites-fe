@@ -12,7 +12,7 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
-const { handleError, handleSuccess } = require('../base/handlers');
+const { handleError, handleSuccess } = require('../00-base/handlers');
 
 const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 
