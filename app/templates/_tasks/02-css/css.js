@@ -3,6 +3,8 @@
  */
 
 const gulp = require('gulp');
+const rename = require('gulp-rename');
+const rev = require('gulp-rev');
 const gulpif = require('gulp-if');
 const del = require('del');
 const tasker = require('gulp-tasker');
@@ -12,14 +14,14 @@ const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const { handleError, handleSuccess } = require('../00-base/handlers');
 
-const { paths } = require(`${process.cwd()}/gulp-config.js`);
+const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 
 const folder = paths.folders.css;
 
 const debug = process.env.NODE_ENV !== 'production';
 
 const cleancss = (done) => {
-  del([`${paths.temp}/**/*.{css,css.map}`]);
+  del([`${paths.dist}/**/*.{css,css.map}`]);
   done();
 };
 
@@ -38,8 +40,36 @@ const compilecss = () =>
       level: debug ? 0 : 2,
     }))
     .pipe(autoprefixer())
+    .pipe(gulpif(revisionFiles, rev()))
     .pipe(gulpif(debug, sourcemaps.write('./')))
-    .pipe(gulp.dest(paths.temp))
+    .pipe(gulp.dest(paths.dist))
+    .pipe(gulpif(revisionFiles, rename({
+      dirname: `${paths.public}`,
+    })))
+    .pipe(gulpif(
+      revisionFiles,
+      rev.manifest(`${paths.dist}/manifest.json`, {
+        base: paths.public,
+        merge: true,
+        transformer: {
+          stringify: (map) => {
+            const cleanObject = {};
+            const keys = Object.keys(map);
+
+            keys.forEach((key) => {
+              cleanObject[`${key.replace(`${paths.public}/`, '')}`] = `${map[key]}`;
+            });
+
+            return JSON.stringify(cleanObject, null, 2);
+          },
+          parse: map => JSON.parse(map),
+        },
+      })
+    ))
+    .pipe(gulpif(
+      revisionFiles,
+      gulp.dest(paths.public)
+    ))
     .pipe(handleSuccess('sass', 'SASS compiling succeeded'));
 
 const cssTask = gulp.series(cleancss, compilecss);

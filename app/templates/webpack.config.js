@@ -1,18 +1,15 @@
 // Get dependencies/plugins
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 // Get gonfig
-const {
-  paths,
-  js: { entries, vendor },
-} = require('./gulp-config.js');
+const { revisionFiles, paths, js: { entries, vendor } } = require('./gulp-config.js');
 
 const folder = paths.folders.js;
-const env =
-  process.env.NODE_ENV === 'production' ? 'production' : 'development';
+const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 // Create entry points
 const entryPoints = {};
-entries.forEach(entry => {
+entries.forEach((entry) => {
   entryPoints[entry.replace('.js', '')] = `${paths.source + folder}/${entry}`;
 });
 
@@ -57,8 +54,16 @@ module.exports = {
 
   output: {
     publicPath: `/${paths.public}/`,
-    filename: '[name].js',
+    filename: (revisionFiles) ? '[name].[contenthash].js' : '[name].js',
   },
 
   plugins: [],
 };
+
+if (revisionFiles) {
+  module.exports.plugins.push(new WebpackAssetsManifest({
+    output: `${paths.dist}/manifest.json`,
+    publicPath: `${paths.public}/`,
+    merge: true,
+  }));
+}

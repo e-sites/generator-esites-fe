@@ -17,7 +17,7 @@ const { revisionFiles, paths } = require(`${process.cwd()}/gulp-config.js`);
 const folder = paths.folders.svg;
 
 const cleansvg = (done) => {
-  del([`${paths.temp}/**/*.svg`]);
+  del([`${paths.dist}/**/*.svg`]);
   done();
 };
 
@@ -52,7 +52,35 @@ const svgconcat = () =>
     ]))
     .pipe(handleError('svgconcat', 'SVG concatenation failed'))
     .pipe(rename('dist.svg'))
-    .pipe(gulp.dest(paths.temp))
+    .pipe(gulpif(revisionFiles, rev()))
+    .pipe(gulp.dest(paths.dist))
+    .pipe(gulpif(revisionFiles, rename({
+      dirname: `${paths.public}`,
+    })))
+    .pipe(gulpif(
+      revisionFiles,
+      rev.manifest(`${paths.dist}/manifest.json`, {
+        base: paths.public,
+        merge: true,
+        transformer: {
+          stringify: (map) => {
+            const cleanObject = {};
+            const keys = Object.keys(map);
+
+            keys.forEach((key) => {
+              cleanObject[`${key.replace(`${paths.public}/`, '')}`] = `${map[key]}`;
+            });
+
+            return JSON.stringify(cleanObject, null, 2);
+          },
+          parse: map => JSON.parse(map),
+        },
+      })
+    ))
+    .pipe(gulpif(
+      revisionFiles,
+      gulp.dest(paths.public)
+    ))
     .pipe(handleSuccess('svgconcat', 'SVG concatenation succeeded'));
 
 const svgTaskDirty = gulp.series(cleansvg, copySVGS, svgconcat);
