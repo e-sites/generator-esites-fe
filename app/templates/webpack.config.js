@@ -1,5 +1,6 @@
 // Get dependencies/plugins
 const path = require('path');
+const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -125,6 +126,11 @@ module.exports = {
         from: `${paths.source + paths.folders.images}`,
         to: paths.folders.images.replace('/', ''),
       },
+      // fonts
+      {
+        from: `${paths.source + paths.folders.fonts}`,
+        to: paths.folders.fonts.replace('/', ''),
+      },
     ]),
 
     new WebpackNotifierPlugin({
@@ -143,6 +149,7 @@ if (revisionFiles) {
 
       // Strip hashes from manifest keys if they are present
       transform: assets => {
+
         const keys = Object.keys(assets);
         const regEx = /\.[^.]{20,}\..{2,}$/;
 
@@ -160,8 +167,12 @@ if (revisionFiles) {
             // flip out the hash from the key
             const cleanKey = splitKey.filter(string => string.length < 20);
 
+            const newKey = cleanKey.join('.');
+
             // insert new key with value
-            assets[cleanKey.join('.')] = value;
+            if (!fs.existsSync(paths.webroot + value)) {
+              assets[newKey] = value;
+            }
           }
         });
       },
