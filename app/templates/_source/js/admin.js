@@ -5,4 +5,18 @@
  * @author: E-sites <frontend@e-sites.nl>
  */
 
-import './app';
+/**
+ * Import polyfills
+ */
+import './polyfills/polyfills';
+
+/**
+ * Import our own handy dandy utilities
+ */
+import './utilities/conditioner';
+import './utilities/svg';
+
+/**
+ * Import CSS
+ */
+import '../css/admin.scss';

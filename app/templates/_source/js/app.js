@@ -6,16 +6,9 @@
  */
 
 /**
- * Add ES5/6/7 polyfills
- * NOTE: Dont forget to add them to the `vendor` entry in `gulp-config.js`
+ * Import polyfills
  */
-import 'core-js/web/dom-collections';
-import 'core-js/es6/object';
-import 'core-js/es6/array';
-import 'core-js/es6/promise';
-import 'core-js/stage/4';
-import 'element-closest';
-import 'svgxuse';
+import './polyfills/polyfills';
 
 /**
  * Import our own handy dandy utilities
@@ -23,3 +16,9 @@ import 'svgxuse';
 import './utilities/conditioner';
 import './utilities/setExtLinks';
 import './utilities/form-validation';
+import './utilities/svg';
+
+/**
+ * Import CSS
+ */
+import '../css/app.scss';

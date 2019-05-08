@@ -254,7 +254,6 @@ Are you sure you want to upgrade?`,
       this._writingStylelint();
 
       if (this.copyTasks) {
-        this._writingGulptasks();
         this._writingWebpack();
       }
 
@@ -359,25 +358,21 @@ Are you sure you want to upgrade?`,
     );
   }
 
-  _writingGulptasks() {
-    this.fs.copyTpl(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js')
-    );
-
-    this.fs.copy(this.templatePath('_tasks'), this.destinationPath('tasks'));
-
-    this.fs.copyTpl(
-      this.templatePath('gulp-config.js'),
-      this.destinationPath('gulp-config.js'),
-      this.templateSettings
-    );
-  }
-
   _writingWebpack() {
     this.fs.copyTpl(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('postcss.config.js'),
+      this.destinationPath('postcss.config.js')
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('esites.config.js'),
+      this.destinationPath('esites.config.js'),
+      this.templateSettings
     );
   }
 
