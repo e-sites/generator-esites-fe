@@ -125,6 +125,11 @@ module.exports = {
         from: `${paths.source + paths.folders.images}`,
         to: paths.folders.images.replace('/', ''),
       },
+      // fonts
+      {
+        from: `${paths.source + paths.folders.fonts}`,
+        to: paths.folders.fonts.replace('/', ''),
+      },
     ]),
 
     new WebpackNotifierPlugin({
