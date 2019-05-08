@@ -48,7 +48,8 @@
     "svgo-loader": "^2.2.0",
     "webpack": "^4.30.0",
     "webpack-assets-manifest": "^3.1.1",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^3.3.2",
+    "webpack-notifier": "^1.7.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

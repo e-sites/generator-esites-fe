@@ -5,6 +5,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 // Get gonfig
 const {
@@ -125,6 +126,12 @@ module.exports = {
         to: paths.folders.images.replace('/', ''),
       },
     ]),
+
+    new WebpackNotifierPlugin({
+      title: 'Webpack',
+      excludeWarnings: true,
+      alwaysNotify: true,
+    }),
   ],
 };
 
