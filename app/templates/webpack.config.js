@@ -146,10 +146,10 @@ if (revisionFiles) {
     new WebpackAssetsManifest({
       output: 'manifest.json',
       publicPath: `${paths.public}/`,
+      merge: true,
 
       // Strip hashes from manifest keys if they are present
       transform: assets => {
-
         const keys = Object.keys(assets);
         const regEx = /\.[^.]{20,}\..{2,}$/;
 
