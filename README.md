@@ -4,16 +4,14 @@ Yeoman generator for E-sites projects
 ## Features
 Please see our [Gulp tasks](https://github.com/e-sites/generator-esites-fe/tree/master/app/templates/_tasks) for up to date information on what we support.
 
-- Running tasks with [Gulp 4](https://github.com/gulpjs/gulp)
+- Asset management with [webpack](https://webpack.js.org/)
 - [ITCSS](https://www.creativebloq.com/web-design/manage-large-css-projects-itcss-101517528) CSS architecture
 - Compile Sass with [libsass](http://libsass.org)
 - Enable CSS plugins with [PostCSS](http://postcss.org/)
 - CSS baseline by [Supple CSS](https://github.com/supple-css/supple)
 - CSS Autoprefixing with [Autoprefixer](https://github.com/postcss/autoprefixer)
-- Javascript management with [webpack](https://webpack.js.org/)
 - ES2015+ features with [Babel](https://babeljs.io)
 - [Conditioner.js](https://github.com/rikschennink/conditioner) - Frizz free, context-aware, JavaScript modules
-- Asset versioning with [gulp-rev](https://github.com/sindresorhus/gulp-rev)
 - SVG polyfill to enable external SVG's in IE10/IE11 with [svgxuse](https://github.com/Keyamoon/svgxuse)
 
 ## Prerequisites
