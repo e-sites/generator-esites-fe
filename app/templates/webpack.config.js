@@ -96,7 +96,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, paths.dist),
-    publicPath: `${paths.public}/`,
+    publicPath: `/${paths.public}/`,
     filename: revisionFiles ? '[name].[contenthash].js' : '[name].js',
   },
 
@@ -145,7 +145,7 @@ if (revisionFiles) {
   module.exports.plugins.push(
     new WebpackAssetsManifest({
       output: 'manifest.json',
-      publicPath: `${paths.public}/`,
+      publicPath: `/${paths.public}/`,
       merge: true,
 
       // Strip hashes from manifest keys if they are present
