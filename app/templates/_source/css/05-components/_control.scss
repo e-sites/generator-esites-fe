@@ -1,28 +1,21 @@
-/*  =========================================================================
-    components.control
-    Checkboxes & Radio buttons
-    ========================================================================= */
-
-/*  Variables
-    ========================================================================= */
+/**
+ * Control
+ * Checkboxes & Radio buttons
+ */
 
 $c-control-space: $supple-space * 1.5 !default;
 $c-control-width: $supple-space !default;
 $c-control-line-height: $supple-space !default;
 $c-control-border-color: $color-gray-900 !default;
 $c-control-indicator-active-color: $color-white !default;
-$c-control-indicator-active-background-color: $color-brand-primary !default;
+$c-control-indicator-active-background-color: $color-primary-500 !default;
 
 
-
-/*  Functions/Mixins
-    ========================================================================= */
-
-
-
-/*  Module
-    ========================================================================= */
-
+/**
+ * ======================================
+ * Block
+ * ======================================
+ */
 .c-control {
   position: relative;
   display: inline-block;
@@ -30,18 +23,19 @@ $c-control-indicator-active-background-color: $color-brand-primary !default;
   @include supple-rem(line-height, $c-control-line-height);
 }
 
+/**
+ * ======================================
+ * Elements
+ * ======================================
+ */
 
 /**
- * Element: input
  * Actual input, is hidden from view with `u-visually-hidden`
  */
 .c-control__input {
   // empty for reference
 }
 
-/**
- * Element: indicator
- */
 .c-control__indicator {
   position: absolute;
   display: block;
@@ -66,9 +60,10 @@ $c-control-indicator-active-background-color: $color-brand-primary !default;
   }
 }
 
-
 /**
- * Modifier: radio
+ * ======================================
+ * Modifiers
+ * ======================================
  */
 .c-control--radio {
   .c-control__indicator {

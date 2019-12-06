@@ -1,13 +1,8 @@
-/*  =========================================================================
-    tools.mixins.generic-focus
-    Creates the same focus styles across browsers
-    ========================================================================= */
-
-/*  Functions/Mixins
-    ========================================================================= */
+/**
+ * Generic focus
+ */
 
 @mixin generic-focus {
-  outline: none;
-  box-shadow: 0 0 5px 1px $color-focus-ring;
+  outline: $color-primary-500 dotted 1px;
+  outline-offset: 2px;
 }
-

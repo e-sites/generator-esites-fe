@@ -4,12 +4,12 @@ framework:
 
 twig:
     paths:
-        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views": EsitesWebsiteBundle
-        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Macros": macros
-        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Form": Forms
-        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms": Atoms
-        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules": Molecules
-        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms": Organisms
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views": esitesWebsiteBundle
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/macros": macros
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/Form": forms
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/patterns/atoms": atoms
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/patterns/molecules": molecules
+        "%kernel.root_dir%/../src/Esites/WebsiteBundle/Resources/views/patterns/organisms": organisms
 
 liip_imagine:
     filter_sets:
@@ -39,30 +39,36 @@ liip_imagine:
 
         # generic crop (used in macro)
         crop_jpeg:
-            quality: 80
-            filters:
-                strip: ~
-                thumbnail:
-                    size: [1000, 1000]
-                    allow_upscale: true
-                    mode: outbound
+        quality: 80
+        filters:
+            strip: ~
+            upscale:
+            min: [1000, 1000]
+            thumbnail:
+            size: [1000, 1000]
+            allow_upscale: true
+            mode: outbound
 
         crop_png:
-            quality: 100
-            format: png
-            filters:
-                strip: ~
-                thumbnail:
-                    size: [1000, 1000]
-                    allow_upscale: true
-                    mode: outbound
+        quality: 100
+        format: png
+        filters:
+            strip: ~
+            upscale:
+            min: [1000, 1000]
+            thumbnail:
+            size: [1000, 1000]
+            allow_upscale: true
+            mode: outbound
 
         crop_gif:
-            quality: 100
-            format: gif
-            filters:
-                strip: ~
-                thumbnail:
-                    size: [1000, 1000]
-                    allow_upscale: true
-                    mode: outbound
+        quality: 100
+        format: gif
+        filters:
+            strip: ~
+            upscale:
+            min: [1000, 1000]
+            thumbnail:
+            size: [1000, 1000]
+            allow_upscale: true
+            mode: outbound

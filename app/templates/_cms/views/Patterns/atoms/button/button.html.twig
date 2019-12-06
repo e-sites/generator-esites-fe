@@ -1,7 +1,7 @@
 {% if button|default(false) and button.label|default(false) %}
   {% import "@macros/macros.html.twig" as macros %}
   {% set tag = button.tag|default('button') %}
-  {% set modifier = button.modifier|default(false) %}
+  {% set extraClasses = button.extraClasses|default(false) %}
   {% set href = button.href|default(false) %}
   {% set label = button.label|default(false) %}
   {% set icon = button.icon|default(false) %}
@@ -9,7 +9,7 @@
   {% set attributes = button.attributes|default(false) %}
 
   <{{tag}}
-    class="c-button{{ modifier ? ' ' ~ modifier }}"
+    class="c-button{{ extraClasses ? ' ' ~ extraClasses }}"
     {% if type %}type="{{ type }}"{% endif %}
     {{ (tag == 'a' and href) ? (' href="' ~ href ~ '"')|raw }}
     {%if attributes %}{% for attr, val in attributes %}{{(' ' ~ attr ~ '="' ~ val|escape('html_attr') ~ '"')|raw}}{% endfor %}{% endif %}
