@@ -1,2 +1,3 @@
 # the usual
 node_modules
+.DS_Store

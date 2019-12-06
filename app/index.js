@@ -18,7 +18,7 @@ module.exports = class extends Generator {
     this.upgrade = false;
     this.copyAssets = true;
     this.copyTasks = true;
-    this.copyCmsStuff = true;
+    this.writeIgnore = false;
 
     // Get possible current config file from project
     const projectConfig = this.config.getAll();
@@ -42,62 +42,39 @@ module.exports = class extends Generator {
         default: this.appname,
         when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
+      // {
+        // type: 'confirm',
+        // name: 'cms',
+        // message: 'Are you scaffolding for a kunstmaan project?',
+        // default: projectConfig.cms,
+        // when: answers => ('upgrade' in answers ? answers.upgrade : true),
+      // },
       {
         type: 'confirm',
-        name: 'cms',
-        message: 'Are you scaffolding for a kunstmaan project?',
-        default: projectConfig.cms,
+        name: 'writeIgnore',
+        message: 'Do you want to write a git ignore file?',
+        default: false,
         when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'input',
         name: 'source',
         message: 'Your source folder?',
-        default: answers => {
-          let string = './source';
-
-          if (projectConfig.source) {
-            string = projectConfig.source;
-          } else if (answers.cms) {
-            string = './src/Esites/WebsiteBundle/Resources/ui';
-          }
-
-          return string;
-        },
+        default: './assets',
         when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'input',
         name: 'webroot',
         message: 'Your web root folder?',
-        default: answers => {
-          let string = './';
-
-          if (projectConfig.webroot) {
-            string = projectConfig.webroot;
-          } else if (answers.cms) {
-            string = './web';
-          }
-
-          return string;
-        },
+        default: './public',
         when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
         type: 'input',
         name: 'build',
         message: 'Your build folder? (relative to web root)',
-        default: answers => {
-          let string = 'build';
-
-          if (projectConfig.build) {
-            string = projectConfig.build;
-          } else if (answers.cms) {
-            string = 'frontend';
-          }
-
-          return string;
-        },
+        default: 'assets',
         when: answers => ('upgrade' in answers ? answers.upgrade : true),
       },
       {
@@ -134,7 +111,7 @@ Are you sure you want to upgrade?`,
             type: 'checkbox',
             name: 'upgradeTypes',
             message: 'What do you want to upgrade?',
-            choices: ['tasks', 'assets', 'cmsstuff'],
+            choices: ['tasks', 'assets'],
             default: ['tasks'],
             when: answers => ('upgrade' in answers ? answers.upgrade : true),
           }
@@ -154,7 +131,6 @@ Are you sure you want to upgrade?`,
       if ('upgradeTypes' in answers) {
         this.copyTasks = answers.upgradeTypes.includes('tasks');
         this.copyAssets = answers.upgradeTypes.includes('assets');
-        this.copyCmsStuff = answers.upgradeTypes.includes('cmsstuff');
       }
 
       if (this.run) {
@@ -205,7 +181,7 @@ Are you sure you want to upgrade?`,
         this.buildFolder = buildfolder;
         this.buildPath = `${this.webRootPath}${this.buildFolder}`;
         this.useTest = answers.useTest;
-        this.useCms = answers.cms;
+        this.writeIgnore = answers.writeIgnore;
 
         /**
          * Store answers in a `.yo-rc.json` for later use
@@ -234,13 +210,7 @@ Are you sure you want to upgrade?`,
 
   writing() {
     if (this.run) {
-      if (this.useCms && this.copyCmsStuff) {
-        this._writingCmsViews();
-        this._writingCmsApp();
-        this._writingCmsGitkeeps();
-      }
-
-      if (!this.useCms) {
+      if (this.writeIgnore) {
         this._writingGitignore();
       }
 
@@ -391,42 +361,6 @@ Are you sure you want to upgrade?`,
     );
   }
 
-  /**
-   * CMS stuff
-   */
-
-  _writingCmsViews() {
-    this.fs.copy(
-      this.templatePath('_cms/views'),
-      this.destinationPath('./src/Esites/WebsiteBundle/Resources/views')
-    );
-  }
-
-  _writingCmsApp() {
-    this.fs.copy(this.templatePath('_cms/app'), this.destinationPath('./app'));
-  }
-
-  _writingCmsGitkeeps() {
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(
-        './src/Esites/WebsiteBundle/Resources/views/Patterns/Atoms/.gitkeep'
-      )
-    );
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(
-        './src/Esites/WebsiteBundle/Resources/views/Patterns/Molecules/.gitkeep'
-      )
-    );
-    this.fs.copyTpl(
-      this.templatePath('.gitkeep'),
-      this.destinationPath(
-        './src/Esites/WebsiteBundle/Resources/views/Patterns/Organisms/.gitkeep'
-      )
-    );
-  }
-
   install() {
     if (this.run) {
       this.installDependencies({
@@ -442,13 +376,13 @@ Are you sure you want to upgrade?`,
     if (this.run) {
       this.log(
         yosay(
-          `${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.` // prettier-ignore
+          `${chalk.rgb(73, 166, 255)('Whoop! We’re done!')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.` // prettier-ignore
         )
       );
     } else {
       this.log(
         yosay(
-          `${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} or ${chalk.rgb(244, 0, 77)('npm run serve')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.` // prettier-ignore
+          `${chalk.rgb(73, 166, 255)('You aborted the upgrade')} Run ${chalk.rgb(244, 0, 77)('npm run start')} for development. Run ${chalk.rgb(244, 0, 77)('npm run build')} for a one time build.` // prettier-ignore
         )
       );
     }
