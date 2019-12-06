@@ -9,10 +9,6 @@
 @import 'supple/lib/settings/defaults';
 @import 'supple/lib/settings/responsive';
 
-
-
-
-
 /*  =========================================================================
     Tools
     Default mixins and functions.
@@ -24,10 +20,6 @@
 @import '01-tools/mixins/shared-input';
 @import '01-tools/mixins/generic-focus';
 
-
-
-
-
 /*  =========================================================================
     Generic
     Ground zero styles (normalize.css, box-sizing, resets).
@@ -36,23 +28,18 @@
 @import 'supple/lib/generic/normalize';
 @import 'supple/lib/generic/reset';
 
-
-
-
-
 /*  =========================================================================
     Elements
     Unclassed HTML element selectors
     ========================================================================= */
 
-@import '03-elements/typography';
+@import '03-elements/img';
 @import '03-elements/links';
 @import '03-elements/rule';
 @import '03-elements/label';
-
-
-
-
+@import '03-elements/select';
+@import '03-elements/svg';
+@import '03-elements/typography';
 
 /*  =========================================================================
     Objects
@@ -64,10 +51,6 @@
 @import 'supple/lib/objects/layout';
 @import 'supple/lib/objects/retain';
 @import 'supple/lib/objects/flexembed';
-
-
-
-
 
 /*  =========================================================================
     Components
@@ -81,10 +64,6 @@
 @import '05-components/control';
 @import '05-components/form';
 @import '05-components/choice';
-
-
-
-
 
 /*  =========================================================================
     Utilities

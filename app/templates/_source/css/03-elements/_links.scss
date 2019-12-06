@@ -1,26 +1,18 @@
-/*  =========================================================================
-    elements.links
-    ========================================================================= */
-
-/*  Variables
-    ========================================================================= */
-
-
-
-/*  Functions/Mixins
-    ========================================================================= */
-
-
-
-/*  Module
-    ========================================================================= */
+/**
+ * Link element
+ */
 
 a {
-  color: $color-brand-primary;
+  color: $color-primary-500;
   text-decoration-skip-ink: auto;
   transition: color $base-animation-duration $base-animation-timing;
 
-  #{$all-hovers} {
+  &:hover,
+  &:focus {
     text-decoration: none;
+  }
+
+  &:focus {
+    @include generic-focus;
   }
 }

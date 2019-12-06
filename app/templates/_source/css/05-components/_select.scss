@@ -1,28 +1,22 @@
-/*  =========================================================================
-    components.select
-    ========================================================================= */
-
-/*  Variables
-    ========================================================================= */
-
-
-
-/*  Functions/Mixins
-    ========================================================================= */
-
-
-
-/*  Module
-    ========================================================================= */
+/**
+ * Select
+ */
 
 /**
- * Block: select
+ * ======================================
+ * Block
+ * ======================================
  */
 .c-select {
   position: relative;
   display: inline-block;
 }
 
+/**
+ * ======================================
+ * Elements
+ * ======================================
+ */
 
 /**
  * Element: input
@@ -37,8 +31,9 @@
   border-color: currentColor;
   color: $color-gray-900;
 
-  #{$all-hovers} {
-    border-color: $color-brand-primary;
+  &:hover,
+  &:focus {
+    border-color: $color-primary-500;
   }
 
   /**
@@ -46,11 +41,11 @@
    * 1. Shit needs to be immutable
    */
   &.is-valid {
-    border-color: $color-success !important; /* [1] */
+    border-color: $color-success-500 !important; /* [1] */
   }
 
   &.is-invalid {
-    border-color: $color-error !important; /* [1] */
+    border-color: $color-error-500 !important; /* [1] */
   }
 
   /**
@@ -65,10 +60,6 @@
   }
 }
 
-
-/**
- * Element: icon
- */
 .c-select__icon {
   position: absolute;
   @include supple-rem(top, $shared-input-padding-vertical + $supple-line-height/2);
@@ -79,3 +70,9 @@
   pointer-events: none;
   user-select: none;
 }
+
+/**
+ * ======================================
+ * Modifiers
+ * ======================================
+ */

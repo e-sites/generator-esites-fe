@@ -1,20 +1,13 @@
-/*  =========================================================================
-    components.button
-    Buttons communicate the action that will occur when the user touches them.
-    ========================================================================= */
+/**
+ * Button
+ * Buttons communicate the action that will occur when the user touches them.
+ */
 
-/*  Variables
-    ========================================================================= */
-
-
-
-/*  Functions/Mixins
-    ========================================================================= */
-
-
-
-/*  Module
-    ========================================================================= */
+/**
+ * ======================================
+ * Block
+ * ======================================
+ */
 
 /**
  * 1. Get the base styles from the shared input mixin
@@ -26,12 +19,48 @@
   margin: 0;
   text-decoration: none; /* [2] */
   cursor: pointer; /* [3] */
-  background-color: $color-brand-primary;
+  background-color: $color-primary-500;
   color: $color-white;
 
-  #{$all-hovers} {
-    color: $color-brand-primary;
+  &:hover,
+  &:focus {
+    color: $color-primary-500;
     background-color: $color-white;
     border-color: currentColor;
   }
 }
+
+/**
+ * ======================================
+ * Elements
+ * ======================================
+ */
+
+/**
+ * We need an inner element here because inline-flex on a button element
+ * breaks in some browsers
+ */
+.c-button__inner {
+  display: inline-flex;
+  align-items: center;
+}
+
+.c-button__label {
+  display: flex;
+}
+
+/**
+ * Small wrapper around our icon component
+ */
+.c-button__wrap-icon {
+  display: flex;
+  text-decoration: none;
+  transition: transform $base-animation-duration $base-animation-timing;
+  @include supple-rem(margin-left, $supple-space-tiny);
+}
+
+/**
+ * ======================================
+ * Modifiers
+ * ======================================
+ */

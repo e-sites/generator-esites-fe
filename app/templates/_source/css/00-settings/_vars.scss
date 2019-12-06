@@ -18,10 +18,6 @@
 $supple-font-size: 16px;
 $supple-line-height: 24px;
 
-
-
-
-
 /*  =========================================================================
     Custom
     Place any of your own variables that sit on top of supple here.
@@ -36,7 +32,9 @@ $supple-line-height: 24px;
 $font-family-base: Arial, sans-serif !default;
 $font-family-heading: Verdana, $font-family-base !default;
 
-
+$font-size-large: $supple-font-size * 1.125 !default;
+$font-size-base: $supple-font-size !default;
+$font-size-small: $supple-font-size * 0.875 !default;
 
 /*  Colors
     ========================================================================= */
@@ -44,15 +42,14 @@ $font-family-heading: Verdana, $font-family-base !default;
 /**
  * Brand colors
  */
-$color-brand-primary: #06a77d !default;
+$color-primary-500: #06a77d !default;
 
 /**
  * Status colors
  */
-$color-error: #fc3030 !default;
-$color-success: #74bd00 !default;
-$color-warning: #f8d407 !default;
-$color-focus-ring: #51cbee !default;
+$color-error-500: #fc3030 !default;
+$color-success-500: #74bd00 !default;
+$color-warning-500: #f8d407 !default;
 
 /**
  * Grayscale
@@ -64,7 +61,6 @@ $color-gray-900: #2c2f33 !default;
 $color-black: #000000 !default;
 
 
-
 /*  Animations
     Global to keep animations consistent
     ========================================================================= */
@@ -73,12 +69,12 @@ $base-animation-duration: 150ms !default;
 $base-animation-timing: cubic-bezier(0.55, 0, 0.1, 1) !default; // Google swift bezier
 
 
-
 /*  Responsive
     Used in conjunction with Sass MQ: https://sass-mq.github.io/sass-mq/
     ========================================================================= */
 
 $mq-base-font-size: $supple-font-size;
+
 
 /**
  * Name your breakpoints in a way that creates a ubiquitous language
@@ -98,12 +94,3 @@ $mq-breakpoints: (
  * to this list, ordered by width, e.g. (mobile, tablet, desktop).
  */
 $mq-show-breakpoints: ();
-
-
-
-/*  Selectors
-    Variables for common selector types like: :hover, :active, etc.
-    ========================================================================= */
-
-$all-hovers: '&:hover, &:focus' !default;
-
