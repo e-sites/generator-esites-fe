@@ -1,6 +1,6 @@
 {
   "name": "generator-esites-fe",
-  "version": "2.0.3",
+  "version": "3.0.1",
   "description": "Yeoman generator for E-sites frontend",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,9 @@
     "frontend"
   ],
   "author": "Bram Smulders <bram@e-sites.nl>",
+  "contributors": [
+    "Remco Tak <remco@e-sites.nl>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/e-sites/generator-esites-fe/issues"
