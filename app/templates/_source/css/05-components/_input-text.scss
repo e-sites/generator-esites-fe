@@ -1,22 +1,14 @@
-/*  =========================================================================
-    components.input-text
-    ========================================================================= */
-
-/*  Variables
-    ========================================================================= */
-
-
-
-/*  Functions/Mixins
-    ========================================================================= */
-
-
-
-/*  Module
-    ========================================================================= */
+/**
+ * Input-text
+ */
 
 /**
- * Block: input-text
+ * ======================================
+ * Block
+ * ======================================
+ */
+
+/**
  * 1. Relies on the `shared-input` mixin in `01-tools/mixins/_shared-input.scss`
  */
 .c-input-text {
@@ -24,8 +16,9 @@
   border-color: currentColor;
   color: $color-gray-900;
 
-  #{$all-hovers} {
-    border-color: $color-brand-primary;
+  &:hover,
+  &:focus {
+    border-color: $color-primary-500;
   }
 
   /**
@@ -33,11 +26,11 @@
    * 1. Shit needs to be immutable
    */
   &.is-valid {
-    border-color: $color-success !important; /* [1] */
+    border-color: $color-success-500 !important; /* [1] */
   }
 
   &.is-invalid {
-    border-color: $color-error !important; /* [1] */
+    border-color: $color-error-500 !important; /* [1] */
   }
 
   /**
@@ -55,4 +48,3 @@
     color: $color-gray-500;
   }
 }
-
