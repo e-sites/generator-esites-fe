@@ -15,27 +15,10 @@
  *    components
  */
 .c-editor-content {
-  @include supple-rem(margin-bottom, $supple-space);
-
   /**
    * Remove margin-bottom from last child of this container
    */
   > :last-child {
     margin-bottom: 0;
-  }
-
-  /**
-   * Float classes
-   */
-  .align-left {
-    float: left;
-    @include supple-rem(margin-left, $supple-space);
-    @include supple-rem(margin-bottom, $supple-space);
-  }
-
-  .align-right {
-    float: right;
-    @include supple-rem(margin-left, $supple-space);
-    @include supple-rem(margin-bottom, $supple-space);
   }
 }
