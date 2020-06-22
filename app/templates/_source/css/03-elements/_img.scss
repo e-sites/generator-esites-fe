@@ -3,5 +3,7 @@
  */
 
 img {
+  // Makes sure each lazyload 3px by 3px is as big as its container
+  width: 100%;
   display: block;
 }
