@@ -3,9 +3,9 @@ module.exports = {
     entries: ['app.js', 'admin.js'],
     vendor: [
       'core-js/web/dom-collections',
-      'core-js/es6/object',
-      'core-js/es6/array',
-      'core-js/es6/promise',
+      'core-js/stable/object',
+      'core-js/stable/array',
+      'core-js/stable/promise',
       'core-js/stage/4',
       'element-closest',
       'svgxuse',

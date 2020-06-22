@@ -14,7 +14,6 @@ import './polyfills/polyfills';
  * Import our own handy dandy utilities
  */
 import './utilities/conditioner';
-import './utilities/svg';
 
 /**
  * Import CSS
