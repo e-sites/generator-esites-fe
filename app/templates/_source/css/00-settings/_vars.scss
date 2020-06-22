@@ -65,9 +65,9 @@ $color-black: #000000 !default;
     Global to keep animations consistent
     ========================================================================= */
 
-$base-animation-duration: 150ms !default;
-$base-animation-timing: cubic-bezier(0.55, 0, 0.1, 1) !default; // Google swift bezier
-
+$base-transition-duration: 150ms !default;
+$base-transition-timing: cubic-bezier(0.55, 0, 0.1, 1) !default; // Google swift bezier
+$base-transition: all $base-transition-duration $base-transition-timing;
 
 /*  Responsive
     Used in conjunction with Sass MQ: https://sass-mq.github.io/sass-mq/
@@ -94,3 +94,8 @@ $mq-breakpoints: (
  * to this list, ordered by width, e.g. (mobile, tablet, desktop).
  */
 $mq-show-breakpoints: ();
+
+/**
+ * A11y sizes
+ */
+$a11y-button-size: 48px;

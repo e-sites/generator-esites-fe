@@ -55,7 +55,7 @@
 .c-button__wrap-icon {
   display: flex;
   text-decoration: none;
-  transition: transform $base-animation-duration $base-animation-timing;
+  transition: transform $base-transition-duration $base-transition-timing;
   @include supple-rem(margin-left, $supple-space-tiny);
 }
 
