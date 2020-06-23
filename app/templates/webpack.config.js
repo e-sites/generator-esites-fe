@@ -7,6 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 // Get gonfig
 const {
@@ -33,6 +34,12 @@ module.exports = {
   module: {
     rules: [
       // javascript
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
@@ -129,6 +136,12 @@ module.exports = {
         to: paths.folders.fonts.replace('/', ''),
       },
     ]),
+
+    // Style lint
+    new StylelintPlugin({
+      configFile: '.stylelintrc',
+      files: `${paths.source}/**/*.scss`,
+    }),
 
     new WebpackNotifierPlugin({
       title: 'Webpack',
