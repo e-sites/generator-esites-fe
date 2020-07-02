@@ -4,6 +4,8 @@
   "description": "<%= projectName %> frontend",
   "scripts": {
     "build": "webpack --mode production",
+    "stylelint": "stylelint '<%= sourcePath %>/**/*.scss'",
+    "eslint": "eslint --ext js,jsx <%= sourcePath %>",
     "lint": "eslint --ext js,jsx <%= sourcePath %> && stylelint '<%= sourcePath %>/**/*.scss'",
     "lint:fix": "eslint --ext js,jsx <%= sourcePath %> --fix",
     "start": "webpack --watch --mode development",
@@ -55,12 +57,12 @@
     "babel-polyfill": "^6.26.0",
     "bourbon": "^5.1.0",
     "conditioner-core": "^2.3.1",
-    "core-js": "^2.6.5",
+    "core-js": "^3.6.5",
     "element-closest": "^3.0.1",
     "formbouncerjs": "^1.4.5",
     "normalize.css": "^8.0.1",
     "sass-mq": "^5.0.0",
-    "supple": "^2.1.1",
+    "supple": "^4.0.1",
     "svgxuse": "^1.2.6"
   }
 }

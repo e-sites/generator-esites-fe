@@ -4,9 +4,9 @@ const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
 // Get gonfig
 const {
@@ -57,23 +57,6 @@ module.exports = {
           },
         ],
       },
-
-      // SVG
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-sprite-loader',
-            options: {
-              extract: true,
-              spriteFilename: revisionFiles
-                ? 'sprite.[contenthash].svg'
-                : 'sprite.svg',
-            },
-          },
-          'svgo-loader',
-        ],
-      },
     ],
   },
 
@@ -112,7 +95,21 @@ module.exports = {
     }),
 
     // Generate SVG sprite
-    new SpriteLoaderPlugin(),
+    new SVGSpritemapPlugin(`${paths.source + paths.folders.svg}/**/*.svg`, {
+      sprite: {
+        prefix: false,
+      },
+      output: {
+        filename: `${
+          revisionFiles ? 'sprite.[contenthash].svg' : 'sprite.svg'
+        }`,
+        chunk: {
+          name: 'sprite',
+          keep: true,
+        },
+        svg4everybody: true,
+      },
+    }),
 
     // copy the rest of the unprocessed files
     new CopyPlugin([

@@ -3,4 +3,97 @@
     used specifically for styling in admin pages
     ========================================================================= */
 
+/*  =========================================================================
+    Settings
+    Global variables, config switches.
+    ========================================================================= */
+
+@charset "UTF-8";
+@import '00-settings/vars';
+
+$root-font-size: 10px;
 $supple-font-size: 10px;
+
+@import 'supple/lib/settings/defaults';
+
+/*  =========================================================================
+    Tools
+    Default mixins and functions.
+    ========================================================================= */
+
+@import 'sass-mq/mq';
+@import 'supple/lib/tools/functions';
+@import 'supple/lib/tools/mixins';
+@import '01-tools/mixins/shared-input';
+@import '01-tools/mixins/generic-focus';
+@import '03-elements/font-face';
+
+/*  =========================================================================
+    Generic
+    Ground zero styles (normalize.css, box-sizing, resets).
+    ========================================================================= */
+
+@import 'supple/lib/generic/normalize';
+@import 'supple/lib/generic/reset';
+
+
+/* Use these styling only in the pagepart previews
+   ========================================================================== */
+.page-template__region .admin-region,
+.pp__view .pp__view__block:first-child {
+  overflow: hidden;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $color-black;
+
+  /*  =========================================================================
+      Elements
+      Unclassed HTML element selectors
+      ========================================================================= */
+
+  @import '03-elements/typography';
+  @import '03-elements/font-face';
+  @import '03-elements/links';
+  @import '03-elements/rule';
+  @import '03-elements/img';
+  @import '03-elements/svg';
+
+  /*  =========================================================================
+      Objects
+      This layer is concerned with styling non-cosmetic design patterns.
+      Prefixed with `o-`
+      ========================================================================= */
+
+  @import 'supple/lib/objects/list-clean';
+  @import 'supple/lib/objects/layout';
+  @import 'supple/lib/objects/retain';
+  @import 'supple/lib/objects/flexembed';
+
+  /*  =========================================================================
+      Components
+      This layer contains our recognisable components, chunks of UI.
+      Prefixed with `c-`
+      ========================================================================= */
+
+  @import '05-components/button';
+  @import '05-components/editor-content';
+
+  /*  =========================================================================
+      Utilities
+      This layer contains some handy helpers & overrides
+      Prefixed with `u-`
+      ========================================================================= */
+
+  // @import 'supple/lib/utilities/fractions';
+  // @import 'supple/lib/utilities/visually-hidden';
+  // @import 'supple/lib/utilities/spacing';
+  @import '06-utilities/umbrella-link';
+
+  /**
+   * Kunstmaan specific overrides below
+   */
+  .c-pagepart {
+    padding: $supple-space-base 0;
+    margin: 0 auto;
+  }
+}

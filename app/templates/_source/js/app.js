@@ -16,7 +16,6 @@ import './polyfills/polyfills';
 import './utilities/conditioner';
 import './utilities/setExtLinks';
 import './utilities/form-validation';
-import './utilities/svg';
 
 /**
  * Import CSS
