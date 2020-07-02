@@ -1,10 +1,6 @@
 {
   "name": "@e-sites/generator-esites-fe",
-<<<<<<< HEAD
   "version": "3.1.2",
-=======
-  "version": "3.1.0",
->>>>>>> be131bfc3568341af490fd15fd3cfa3cc0fdade3
   "description": "Yeoman generator for E-sites frontend",
   "main": "index.js",
   "scripts": {
