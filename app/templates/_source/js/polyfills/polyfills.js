@@ -9,4 +9,3 @@ import 'core-js/stable/promise';
 import 'core-js/stage/4';
 import 'element-closest';
 import 'svgxuse';
-import 'intersection-observer';

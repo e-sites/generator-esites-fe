@@ -22,11 +22,9 @@
  * Element: input
  * 1. Relies on the `shared-input` mixin in `01-tools/mixins/_shared-input.scss`
  * 2. Accommodate space for the icon
- * 3. Set explicit height because firefox does not respect the line-height
  */
 .c-select__input {
   @include shared-input; /* [1] */
-  @include supple-rem(height, $supple-line-height + $shared-input-padding-vertical*2); /* [3] */
   padding-right: $supple-space-large; /* [2] */
   border-color: currentColor;
   color: $color-gray-900;
@@ -62,11 +60,11 @@
 
 .c-select__icon {
   position: absolute;
-  @include supple-rem(top, $shared-input-padding-vertical + $supple-line-height/2);
-  @include supple-rem(right, $supple-space);
-  @include supple-rem(width, $supple-font-size);
-  @include supple-rem(height, $supple-font-size);
-  transform: translateY(-50%);
+  top: 50%;
+  right: $supple-space-small;
+  width: 10px;
+  height: 10px;
+  transform: translate(50%, -50%);
   pointer-events: none;
   user-select: none;
 }
