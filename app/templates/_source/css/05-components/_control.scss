@@ -3,9 +3,9 @@
  * Checkboxes & Radio buttons
  */
 
-$c-control-space: $supple-space * 1.5 !default;
-$c-control-width: $supple-space !default;
-$c-control-line-height: $supple-space !default;
+$c-control-space: $supple-space-base * 1.5 !default;
+$c-control-width: $supple-space-base !default;
+$c-control-line-height: $supple-space-base !default;
 $c-control-border-color: $color-gray-900 !default;
 $c-control-indicator-active-color: $color-white !default;
 $c-control-indicator-active-background-color: $color-primary-500 !default;

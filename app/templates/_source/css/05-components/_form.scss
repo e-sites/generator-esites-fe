@@ -9,7 +9,7 @@
  * ======================================
  */
 .c-form {
-  @include supple-rem(margin-bottom, $supple-space);
+  @include supple-rem(margin-bottom, $supple-space-base);
 }
 
 /**
@@ -18,7 +18,7 @@
  * ======================================
  */
 .c-form__row {
-  @include supple-rem(margin-bottom, $supple-space);
+  @include supple-rem(margin-bottom, $supple-space-base);
 }
 
 .c-form__wrap-label,
