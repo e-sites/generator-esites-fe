@@ -98,6 +98,9 @@ module.exports = {
     new SVGSpritemapPlugin(`${paths.source + paths.folders.svg}/**/*.svg`, {
       sprite: {
         prefix: false,
+        generate: {
+          title: false,
+        }
       },
       output: {
         filename: `${
