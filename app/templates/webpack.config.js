@@ -115,23 +115,15 @@ module.exports = {
     }),
 
     // copy the rest of the unprocessed files
-    new CopyPlugin([
-      // Loose svg's
-      {
-        from: `${paths.source + paths.folders.svg}`,
-        to: paths.folders.svg.replace('/', ''),
-      },
-      // Loose images
-      {
-        from: `${paths.source + paths.folders.images}`,
-        to: paths.folders.images.replace('/', ''),
-      },
-      // fonts
-      {
-        from: `${paths.source + paths.folders.fonts}`,
-        to: paths.folders.fonts.replace('/', ''),
-      },
-    ]),
+    new CopyPlugin(
+      ['svg', 'images', 'fonts']
+        .map(entry => (
+          {
+            from: `${paths.source + paths.folders[entry]}`,
+            to: paths.folders[entry].replace('/', ''),
+          }
+        ))
+    ),
 
     new WebpackNotifierPlugin({
       title: 'Webpack',
