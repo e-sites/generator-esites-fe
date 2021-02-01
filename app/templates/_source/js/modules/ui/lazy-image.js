@@ -4,11 +4,15 @@ const loadComplete = ({ target }) => {
 };
 
 const loadImage = imgElement => {
+  const { src = null, srcset = null} = imgElement.dataset;
   imgElement.addEventListener('load', loadComplete);
-  if ('srcset' in HTMLImageElement.prototype === false) {
-    imgElement.src = imgElement.dataset.src;
+  if (
+    'srcset' in HTMLImageElement.prototype === false ||
+    !srcset
+  ) {
+    imgElement.src = src;
   } else {
-    imgElement.srcset = imgElement.dataset.srcset;
+    imgElement.srcset = srcset;
   }
 };
 
