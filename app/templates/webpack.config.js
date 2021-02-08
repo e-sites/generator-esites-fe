@@ -100,7 +100,7 @@ module.exports = {
         prefix: false,
         generate: {
           title: false,
-        }
+        },
       },
       output: {
         filename: `${
@@ -115,15 +115,12 @@ module.exports = {
     }),
 
     // copy the rest of the unprocessed files
-    new CopyPlugin(
-      ['svg', 'images', 'fonts']
-        .map(entry => (
-          {
-            from: `${paths.source + paths.folders[entry]}`,
-            to: paths.folders[entry].replace('/', ''),
-          }
-        ))
-    ),
+    new CopyPlugin({
+      patterns: ['svg', 'images', 'fonts'].map(entry => ({
+        from: `${paths.source + paths.folders[entry]}`,
+        to: paths.folders[entry].replace('/', ''),
+      })),
+    }),
 
     new WebpackNotifierPlugin({
       title: 'Webpack',
