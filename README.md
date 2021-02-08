@@ -38,6 +38,11 @@ npm update -g yo @e-sites/generator-esites-fe
 
 **Note**: Mac users need to run above commands with `sudo`.
 
+## Updating this yeoman package
+
+1. After updating this Yeoman package make sure to bump the versioning in `package.json` and assign a new release tag in Gitlab.
+2. Run `npm publish` to publish the new version to the npm registry
+
 ## Usage
 
 Please make sure your system meets the [prerequisites](#prerequisites).
