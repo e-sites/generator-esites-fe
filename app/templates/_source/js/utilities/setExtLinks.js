@@ -14,7 +14,12 @@ const setExtLinks = {
   initAll: links => {
     if (links) {
       [...links].forEach(link => {
-        link.setAttribute('rel', 'noopener');
+        const currentRel = link.getAttribute('rel');
+        // Add the current rel to the noopener rel
+        link.setAttribute(
+          'rel',
+          `noopener${currentRel ? ` ${currentRel}` : ''}`
+        );
       });
     }
   },
